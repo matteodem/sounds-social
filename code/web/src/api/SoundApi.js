@@ -157,9 +157,8 @@ export const createSound = ({
   name,
   description,
   file,
-  isUser,
-  uploader,
-  userId,
+  groupId,
+  creatorId,
   isPublic
 }) =>
   apolloClient.mutate({
@@ -186,14 +185,7 @@ export const createSound = ({
         }
       }
     `,
-    variables: {
-      name,
-      description,
-      file,
-      groupId: isUser ? null : uploader,
-      creatorId: userId,
-      isPublic
-    }
+    variables: { name, description, file, groupId, creatorId, isPublic }
   })
 
 export const listSoundDefaultQuery = gql`

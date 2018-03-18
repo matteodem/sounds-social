@@ -26,24 +26,10 @@
   </div>
 </template>
 <script>
-  import gql from 'graphql-tag'
   import { getUsername, getUserId } from '../../../api/AuthApi'
   import { addMusicFile } from '../../../api/StorageApi'
   import { groupOptionDataQuery } from '../../../api/GroupApi'
-
-  const createSoundMutation = gql`
-    mutation ($name: String! $groupId: String $description: String $file: FileData! $creatorId: String! $isPublic: Boolean!) {
-      createSound(groupId: $groupId data: {
-        name: $name
-        creatorId: $creatorId
-        file: $file
-        isPublic: $isPublic
-        description: $description
-      }) {
-        _id
-      }
-    }
-`
+  import { createSound } from '../../../api/SoundApi'
 
   export default {
     mounted () {
@@ -62,10 +48,7 @@
     },
     methods: {
       changeField (key) {
-        return value => {
-          console.log(value, key)
-          this.$store.dispatch('changeUploadSoundField', { key, value })
-        }
+        return value => this.$store.dispatch('changeUploadSoundField', { key, value })
       },
       uploadMusicFile (e) {
         const file = e.target.files[0]
@@ -89,23 +72,11 @@
           })
       },
       saveSound (isPublic) {
-        // TODO: put into store
         const { name, userId, uploader, description, file } = this.data
 
         const isUser = uploader === 'user'
 
-        this.$apollo
-          .mutate({
-            mutation: createSoundMutation,
-            variables: {
-              name,
-              description,
-              file,
-              groupId: isUser ? null : uploader,
-              creatorId: userId,
-              isPublic,
-            },
-          })
+        createSound({ name, description, file, groupId: isUser ? null : uploader, creatorId: userId, isPublic })
           .then((data) => (data.data.createSound ? this.$router.push({
             name: 'sound-detail',
             params: {
