@@ -21,8 +21,14 @@
       </div>
       <div class="description username f5 gray">
         <span v-text="$t('by')"></span>
-        <select class="dim pointer bg-transparent b--black-20 gray dib v-mid" @change="$emit('changeUploader', $event.target.value)">
-          <option :key="option.value" v-for="option in uploaderOptions" :value="option.value" v-text="option.label"></option>
+        <select class="dim pointer bg-transparent b--black-20 gray dib v-mid"
+                @change="$emit('changeUploader', $event.target.value)">
+          <option
+            :key="option.value"
+            v-for="option in uploaderOptions"
+            :value="option.value"
+            :selected="option.value === uploaderId"
+            v-text="option.label"></option>
         </select></div>
 
       <textarea
@@ -74,6 +80,10 @@
         required: false,
       },
       description: {
+        type: String,
+        required: false,
+      },
+      uploaderId: {
         type: String,
         required: false,
       },
