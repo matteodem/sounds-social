@@ -41,7 +41,7 @@
         let uploadText = this.$t('Upload')
         
         if (isUploading) {
-          uploadText = `${this.$t'Uploading')}...`
+          uploadText = `${this.$t('Uploading')}...`
         } else if (hasFile) {
           uploadText = this.$t('Uploaded')
         }
