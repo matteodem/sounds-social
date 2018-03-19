@@ -13,6 +13,8 @@ export const messages = {
       Website: 'Webseite',
       Profile: 'Profil',
       Upload: 'Heraufladen',
+      Uploading: 'Wird hochgeladen',
+      Uploaded: 'Heraufgeladen',
       Description: 'Beschreibung',
       Search: 'Suche',
       Edit: 'Editieren',
