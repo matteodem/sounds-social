@@ -8,7 +8,7 @@
           <pure-input @onEnter="sendMail" @keyup="email = arguments[0]" placeholder="Email"></pure-input>
         </div>
 
-        <div class="mt3 tc">
+        <div class="mt4 tc">
           <pure-button @click="sendMail" :disabled="!email" v-text="$t('Send recovery email')"></pure-button>
         </div>
       </div>

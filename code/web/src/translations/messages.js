@@ -9,6 +9,7 @@ export const messages = {
       Register: 'Registrieren',
       Username: 'Benutzername',
       Password: 'Passwort',
+      Success: 'Erfolg',
       Logout: 'Ausloggen',
       Website: 'Webseite',
       Profile: 'Profil',
@@ -81,7 +82,12 @@ export const messages = {
       'Add group avatar': 'Gruppenbild hinzufügen',
       'Part of': 'Teil von',
       'Label, Group, Collective': 'Label, Gruppe, Kollektiv',
-      'Consists of': 'Besteht aus'
+      'Consists of': 'Besteht aus',
+      "Let's stay in contact": 'Bleiben wir in Kontakt',
+      'Want to stay up to date?': 'Möchtest du auf dem Laufenden bleiben?',
+      "You'll be one of the first ones to know about news":
+        'Du wirst einer der Ersten sein, die über Neuigkeiten Bescheid weiss',
+      'Sign up for newsletter': 'Für Newsletter anmelden'
     }
   }
 }
