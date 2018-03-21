@@ -15,7 +15,7 @@ import { fetchGroupFollowerCount } from '../../data/collection/methods/Group/fet
 import { generateCacheKey } from '../helpers/generateCacheKey'
 import { fetchCreatorSoundPlayCount } from '../../data/collection/methods/Sound/fetchCreatorSoundPlayCount'
 import { GroupTypeDef } from './Group/GroupTypeDef'
-import { isCreatorResolver } from './generate/isCreatorResolver'
+import { isCreatorResolver } from './general/isCreatorResolver'
 
 export default {
   typeDefs: [GroupTypeDef],

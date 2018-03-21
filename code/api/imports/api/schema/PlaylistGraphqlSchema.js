@@ -12,7 +12,7 @@ import { fetchOneSoundCoverFile } from '../../data/collection/methods/File/fetch
 import { checkSound } from '../../lib/check/checkSound'
 import { PlaylistTypeDef } from './Playlist/PlaylistTypeDef'
 import { findSoundsForPlaylist } from '../../data/collection/methods/Sound/findSoundsForPlaylist'
-import { isCreatorResolver } from './generate/isCreatorResolver'
+import { isCreatorResolver } from './general/isCreatorResolver'
 
 export default {
   typeDefs: [PlaylistTypeDef],
