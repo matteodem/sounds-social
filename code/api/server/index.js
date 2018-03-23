@@ -10,6 +10,7 @@ import mongoFieldsMiddleware from '../imports/middleware/MongoFieldsContextMiddl
 
 import '../imports/config'
 import '../imports/listener'
+import '../imports/cron'
 import { resolvers, typeDefs } from '../imports/api/schema'
 
 initAccounts()

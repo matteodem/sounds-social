@@ -17,7 +17,6 @@
               <span v-text="$t('This project is is a')"></span> <a class="color-inherit"
                                                                    href="https://github.com/matteodem/sounds-social"
                                                                    v-text="$t('work in progress')"></a>.
-              <!-- FIXME only have up to date as a link but still translatable -->
               <a href=""
                  @click.prevent="openNewsletterModal"
                  class="color-inherit"
