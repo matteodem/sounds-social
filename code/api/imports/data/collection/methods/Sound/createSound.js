@@ -1,5 +1,4 @@
 import { omit } from 'lodash/fp'
-import { check, Match } from 'meteor/check'
 import { soundCollection } from '../../SoundCollection'
 import { fileCollection } from '../../FileCollection'
 import { isMemberOfGroup } from '../Group/isMemberOfGroup'
