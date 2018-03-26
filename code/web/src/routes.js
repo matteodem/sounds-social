@@ -16,7 +16,7 @@ import SearchPage from './components/pages/TheSearchPage.vue'
 import { soundRoutes } from './routes/SoundRoutes'
 import { profileRoutes } from './routes/ProfileRoutes'
 import { playlistRoutes } from './routes/PlaylistRoutes'
-import { groupRoutes } from './routes/GroupRoutes'
+import { aliasRoutes } from './routes/AliasRoutes'
 import { authRoutes } from './routes/AuthRoutes'
 
 Vue.use(Router)
@@ -62,7 +62,7 @@ const router = new Router({
     ...soundRoutes,
     ...profileRoutes,
     ...playlistRoutes,
-    ...groupRoutes,
+    ...aliasRoutes,
     ...authRoutes
   ]
 })

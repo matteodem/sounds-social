@@ -3,7 +3,7 @@
     <div id="soundUploadBox">
       <sound-form-box
         :username="data.username"
-        :groups="groupOptionData"
+        :aliases="aliasOptionData"
         :hasFile="data.hasFile"
         :isUploading="data.isUploading"
         :name="data.name"
@@ -28,7 +28,7 @@
 <script>
   import { getUsername, getUserId } from '../../../api/AuthApi'
   import { addMusicFile } from '../../../api/StorageApi'
-  import { groupOptionDataQuery } from '../../../api/GroupApi'
+  import { aliasOptionDataQuery } from '../../../api/AliasApi'
   import { createSound } from '../../../api/SoundApi'
 
   export default {
@@ -37,8 +37,8 @@
       getUserId().then(this.changeField('userId'))
     },
     apollo: {
-      groupOptionData: {
-        query: groupOptionDataQuery,
+      aliasOptionData: {
+        query: aliasOptionDataQuery,
       }
     },
     computed: {
@@ -76,7 +76,7 @@
 
         const isUser = uploader === 'user'
 
-        createSound({ name, description, file, groupId: isUser ? null : uploader, creatorId: userId, isPublic })
+        createSound({ name, description, file, aliasId: isUser ? null : uploader, creatorId: userId, isPublic })
           .then((data) => (data.data.createSound ? this.$router.push({
             name: 'sound-detail',
             params: {

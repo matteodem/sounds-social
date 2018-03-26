@@ -16,7 +16,7 @@ export const ProfileBoxFieldsFragment = gql`
     }
     followerCount
     playCount
-    groups {
+    aliases {
       _id
       name
       avatarFile {

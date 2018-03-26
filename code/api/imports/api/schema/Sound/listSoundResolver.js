@@ -6,7 +6,7 @@ import {
 } from '../../helpers/PaginationMethods'
 import { SOUND_DEFAULT_LIMIT } from '../SoundGraphqlSchema'
 import { findFeedSoundsForUser } from '../../../data/collection/methods/Sound/Feed/findFeedSoundsForUser'
-import { findFeedSoundsForGroup } from '../../../data/collection/methods/Sound/Feed/findFeedSoundsForGroup'
+import { findFeedSoundsForAlias } from '../../../data/collection/methods/Sound/Feed/findFeedSoundsForAlias'
 import { findFeedSoundsForFeed } from '../../../data/collection/methods/Sound/Feed/findFeedSoundsForFeed'
 import { findFeedSoundsForDiscover } from '../../../data/collection/methods/Sound/Feed/findFeedSoundsForDiscover'
 
@@ -21,7 +21,7 @@ export const listSoundResolver = makePaginatableResolver({
     const getValue = get('value')
     const compareKey = keyToCompare => ({ key }) => key === keyToCompare
     const userFilterId = getValue(filters.filter(compareKey('user'))[0])
-    const groupFilterId = getValue(filters.filter(compareKey('group'))[0])
+    const aliasFilterId = getValue(filters.filter(compareKey('alias'))[0])
     const isFeed =
       getValue(filters.filter(compareKey('loggedInFeed'))[0]) === 'true'
 
@@ -31,8 +31,8 @@ export const listSoundResolver = makePaginatableResolver({
       findSoundsQuery = findFeedSoundsForUser(userId)(userFilterId)
     }
 
-    if (groupFilterId) {
-      findSoundsQuery = findFeedSoundsForGroup(userId)(groupFilterId)
+    if (aliasFilterId) {
+      findSoundsQuery = findFeedSoundsForAlias(userId)(aliasFilterId)
     }
 
     if (isFeed) findSoundsQuery = findFeedSoundsForFeed(userId)

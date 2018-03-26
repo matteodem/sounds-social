@@ -2,7 +2,7 @@ import { constant, get } from 'lodash/fp'
 import { Index, MongoDBEngine } from 'meteor/easysearch:core'
 import { findRelatedFieldDocuments } from './findRelatedFieldDocuments'
 import { soundCollection } from '../collection/SoundCollection'
-import { groupCollectionName } from '../collection/GroupCollection'
+import { aliasCollectionName } from '../collection/AliasCollection'
 import { userCollectionName } from '../collection/UserCollection'
 import { selectUserIsCreator } from '../collection/methods/Sound/selectUserIsCreator'
 import { selectIsPublic } from '../collection/methods/general/selectIsPublic'
@@ -17,14 +17,14 @@ const searchByUsername = (config, query, cb) =>
     as: 'aggregatedAuthor',
   })
 
-const searchByGroupName = (config, query, cb) =>
+const searchByAliasName = (config, query, cb) =>
   findRelatedFieldDocuments({
     collection: soundCollection,
-    selector: config.selectorPerField('aggregatedGroupAuthor.name', query),
-    from: groupCollectionName,
+    selector: config.selectorPerField('aggregatedAliasAuthor.name', query),
+    from: aliasCollectionName,
     localField: 'creatorId',
     foreignField: '_id',
-    as: 'aggregatedGroupAuthor',
+    as: 'aggregatedAliasAuthor',
   })
 
 export const soundSearchIndex = new Index({
@@ -50,7 +50,7 @@ export const soundSearchIndex = new Index({
                     ...searchByUsername(defaultConfig, queryObject.name).map(
                       get('_id')
                     ),
-                    ...searchByGroupName(defaultConfig, queryObject.name).map(
+                    ...searchByAliasName(defaultConfig, queryObject.name).map(
                       get('_id')
                     ),
                   ],

@@ -4,28 +4,28 @@
       <header-component current="sounds"></header-component>
     </div>
     <div slot="main">
-      <div v-if="singleGroup">
-        <pure-title v-text="singleGroup.name"></pure-title>
-        <h2 class="f3 f2-ns mv3 gray" v-text="singleGroup.type"></h2>
+      <div v-if="singleAlias">
+        <pure-title v-text="singleAlias.name"></pure-title>
+        <h2 class="f3 f2-ns mv3 gray" v-text="singleAlias.type"></h2>
         <sound-list-component
-          :query="groupSoundsQuery"
+          :query="aliasSoundsQuery"
           :defineQueryVariables="defineSoundListQueryVariables"></sound-list-component>
       </div>
-      <div v-if="!groupLoading && !singleGroup">
-        <div class="i" v-text="$t('Group not found')"></div>
+      <div v-if="!aliasLoading && !singleAlias">
+        <div class="i" v-text="$t('Alias not found')"></div>
       </div>
     </div>
     <div slot="sidebar">
-      <div v-if="singleGroup">
-        <stateful-profile-box :group="singleGroup"></stateful-profile-box>
+      <div v-if="singleAlias">
+        <stateful-profile-box :alias="singleAlias"></stateful-profile-box>
 
-        <div class="mv4 tc" v-if="singleGroup.isEditable">
-          <pure-button @click="$router.push({ name: 'group-edit', params: { id: singleGroup._id } })" v-text="$t('Edit group')"></pure-button>
+        <div class="mv4 tc" v-if="singleAlias.isEditable">
+          <pure-button @click="$router.push({ name: 'alias-edit', params: { id: singleAlias._id } })" v-text="$t('Edit alias')"></pure-button>
         </div>
 
         <member-list
           @openMember="$router.push({ name: 'profile-detail', params: { id: arguments[0]._id } })"
-          :members="singleGroup.members"></member-list>
+          :members="singleAlias.members"></member-list>
       </div>
     </div>
   </layout-with-sidebar>
@@ -33,9 +33,9 @@
 <script type="text/ecmascript-6">
   import HeaderComponent from '../../stateful/StatefulHeader.vue'
   import SoundListComponent from '../../stateful/sound/StatefulSoundList.vue'
-  import StatefulProfileBox from '../../stateful/Group/StatefulGroupProfileBox.vue'
-  import { groupPageQuery as query } from '../../../api/GroupApi'
-  import { groupSoundsQuery } from '../../../api/SoundApi'
+  import StatefulProfileBox from '../../stateful/Alias/StatefulAliasProfileBox.vue'
+  import { aliasPageQuery as query } from '../../../api/AliasApi'
+  import { aliasSoundsQuery } from '../../../api/SoundApi'
 
   export default {
     components: {
@@ -44,9 +44,9 @@
       StatefulProfileBox,
     },
     metaInfo () {
-      if (this.singleGroup) {
+      if (this.singleAlias) {
         return {
-          title: this.singleGroup.name,
+          title: this.singleAlias.name,
         }
       }
 
@@ -54,15 +54,15 @@
     },
     data () {
       return {
-        singleGroup: null,
-        groupLoading: 0,
-        groupSoundsQuery,
+        singleAlias: null,
+        aliasLoading: 0,
+        aliasSoundsQuery,
       }
     },
     apollo: {
-      singleGroup: {
+      singleAlias: {
         query,
-        loadingKey: 'groupLoading',
+        loadingKey: 'aliasLoading',
         fetchPolicy: 'network-only',
         variables () {
           return { id: this.$route.params.id }
@@ -72,7 +72,7 @@
     methods: {
       defineSoundListQueryVariables () {
         return {
-          groupId: this.$route.params.id,
+          aliasId: this.$route.params.id,
         }
       },
     },

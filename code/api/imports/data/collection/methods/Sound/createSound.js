@@ -1,11 +1,11 @@
 import { omit } from 'lodash/fp'
 import { soundCollection } from '../../SoundCollection'
 import { fileCollection } from '../../FileCollection'
-import { isMemberOfGroup } from '../Group/isMemberOfGroup'
+import { isMemberOfAlias } from '../Alias/isMemberOfAlias'
 import { fetchOneSoundById } from './fetchOneSoundById'
 import { checkSoundData } from '../../../../lib/check/checkSound'
 
-export const createSound = currentUserId => data => optionalGroupId => {
+export const createSound = currentUserId => data => optionalAliasId => {
   const omitFile = omit(['file'])
   data.createdAt = new Date()
 
@@ -14,9 +14,9 @@ export const createSound = currentUserId => data => optionalGroupId => {
   data.creatorId = currentUserId
   data.ownerType = 'user'
 
-  if (optionalGroupId && isMemberOfGroup(currentUserId)(optionalGroupId)) {
-    data.creatorId = optionalGroupId
-    data.ownerType = 'group'
+  if (optionalAliasId && isMemberOfAlias(currentUserId)(optionalAliasId)) {
+    data.creatorId = optionalAliasId
+    data.ownerType = 'alias'
   }
 
   if (!data.file) throw new Error('Need file to add sound')

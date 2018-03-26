@@ -1,5 +1,5 @@
 import { fetchUserFollowerIdsForUser } from '../User/fetchUserFollowerIdsForUser'
-import { fetchGroupFollowerIdsForUser } from '../Group/fetchGroupFollowerIdsForUser'
+import { fetchAliasFollowerIdsForUser } from '../Alias/fetchAliasFollowerIdsForUser'
 import { selectIsPublic } from '../general/selectIsPublic'
 
 export const selectFollowedByUser = userId => {
@@ -8,7 +8,7 @@ export const selectFollowedByUser = userId => {
     creatorId: {
       $in: [
         ...fetchUserFollowerIdsForUser(userId),
-        ...fetchGroupFollowerIdsForUser(userId),
+        ...fetchAliasFollowerIdsForUser(userId),
       ],
     },
   }

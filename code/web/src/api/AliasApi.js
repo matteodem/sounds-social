@@ -2,8 +2,8 @@ import { startCase } from 'lodash/fp'
 import gql from 'graphql-tag'
 import { apolloClient } from './graphql/client'
 
-export const GroupDetailedFieldsFragment = gql`
-  fragment GroupDetailedFields on Group {
+export const AliasDetailedFieldsFragment = gql`
+  fragment AliasDetailedFields on Alias {
     _id
     name
     type
@@ -29,7 +29,7 @@ export const GroupDetailedFieldsFragment = gql`
   }
 `
 
-export const saveGroup = (
+export const saveAlias = (
   id,
   name,
   type,
@@ -41,7 +41,7 @@ export const saveGroup = (
 
   return apolloClient.mutate({
     mutation: gql`
-      mutation ${startCase(action)}Group(
+      mutation ${startCase(action)}Alias(
           ${id ? '$id: String!' : ''}
           $name: String! 
           $type: String! 
@@ -49,7 +49,7 @@ export const saveGroup = (
           $avatarFile: FileData 
           $description: String
       ) {
-        group: ${action}Group(${
+        alias: ${action}Alias(${
       id ? '_id: $id' : ''
     } data: { name: $name type: $type websiteUrl: $websiteUrl avatarFile: $avatarFile description: $description }) {
           _id
@@ -60,11 +60,11 @@ export const saveGroup = (
   })
 }
 
-export const removeGroup = id =>
+export const removeAlias = id =>
   apolloClient.mutate({
     mutation: gql`
-      mutation RemoveGroup($id: String!) {
-        group: removeGroup(_id: $id) {
+      mutation RemoveAlias($id: String!) {
+        alias: removeAlias(_id: $id) {
           _id
         }
       }
@@ -75,41 +75,41 @@ export const removeGroup = id =>
 export const follow = id =>
   apolloClient.mutate({
     mutation: gql`
-      mutation FollowGroupMutation($id: String!) {
-        followGroup(toFollowId: $id) {
+      mutation FollowAliasMutation($id: String!) {
+        followAlias(toFollowId: $id) {
           _id
         }
       }
     `,
     variables: { id },
-    refetchQueries: ['GroupPage']
+    refetchQueries: ['AliasPage']
   })
 
 export const unfollow = id =>
   apolloClient.mutate({
     mutation: gql`
-      mutation UnfollowGroupMutation($id: String!) {
-        unfollowGroup(toUnfollowId: $id) {
+      mutation UnfollowAliasMutation($id: String!) {
+        unfollowAlias(toUnfollowId: $id) {
           _id
         }
       }
     `,
     variables: { id },
-    refetchQueries: ['GroupPage']
+    refetchQueries: ['AliasPage']
   })
 
-export const groupPageQuery = gql`
-  query GroupPage($id: String!) {
-    singleGroup: getGroup(_id: $id) {
-      ...GroupDetailedFields
+export const aliasPageQuery = gql`
+  query AliasPage($id: String!) {
+    singleAlias: getAlias(_id: $id) {
+      ...AliasDetailedFields
     }
   }
-  ${GroupDetailedFieldsFragment}
+  ${AliasDetailedFieldsFragment}
 `
 
-export const groupFormDataQuery = gql`
-  query GroupFormData($id: String!) {
-    groupFormData: getGroup(_id: $id) {
+export const aliasFormDataQuery = gql`
+  query AliasFormData($id: String!) {
+    aliasFormData: getAlias(_id: $id) {
       name
       type
       description
@@ -118,9 +118,9 @@ export const groupFormDataQuery = gql`
   }
 `
 
-export const groupOptionDataQuery = gql`
-  query GroupOptionData {
-    groupOptionData: listGroupForUser {
+export const aliasOptionDataQuery = gql`
+  query AliasOptionData {
+    aliasOptionData: listAliasForUser {
       _id
       name
     }

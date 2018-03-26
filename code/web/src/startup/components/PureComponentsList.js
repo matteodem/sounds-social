@@ -31,8 +31,8 @@ import LoaderText from '../../components/pure/Loader/PureLoaderText.vue'
 import LoaderSound from '../../components/pure/Loader/PureLoaderSound.vue'
 import LoaderSoundList from '../../components/pure/Loader/PureLoaderSoundList.vue'
 import LoaderTransition from '../../components/pure/Loader/PureLoaderTransition.vue'
-import MemberList from '../../components/pure/Group/PureMemberList.vue'
-import GroupList from '../../components/pure/Group/PureGroupList.vue'
+import MemberList from '../../components/pure/Alias/PureMemberList.vue'
+import AliasList from '../../components/pure/Alias/PureAliasList.vue'
 import FormError from '../../components/pure/Form/PureFormError.vue'
 import FormField from '../../components/pure/Form/PureFormField.vue'
 import NumberCount from '../../components/pure/User/PureNumberCount.vue'
@@ -75,7 +75,7 @@ export const ComponentsList = [
   { id: 'pure-loader-sound-list', component: LoaderSoundList },
   { id: 'pure-loader-transition', component: LoaderTransition },
   { id: 'member-list', component: MemberList },
-  { id: 'group-list', component: GroupList },
+  { id: 'alias-list', component: AliasList },
   { id: 'number-count', component: NumberCount },
   { id: 'pagination-buttons', component: PaginationButtons }
 ]

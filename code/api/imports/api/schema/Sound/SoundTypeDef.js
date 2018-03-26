@@ -30,7 +30,7 @@ type SoundPlay {
 }
 
 extend type Mutation {
-  createSound(data: SoundInput! groupId: String): Sound
+  createSound(data: SoundInput! aliasId: String): Sound
   publishSound(soundId: String!): Sound
   addCoverFile(soundId: String! fileData: FileData!): Sound
   startPlayingSound(soundId: String!): SoundPlay

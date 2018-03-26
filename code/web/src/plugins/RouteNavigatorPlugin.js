@@ -3,7 +3,7 @@ import router from '../routes'
 const routeNavigator = {
   openProfile (id, type) {
     router.push({
-      name: type === 'group' ? 'group-detail' : 'profile-detail',
+      name: type === 'alias' ? 'alias-detail' : 'profile-detail',
       params: { id }
     })
   }

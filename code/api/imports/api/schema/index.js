@@ -6,7 +6,7 @@ import soundSchema from './SoundGraphqlSchema'
 import userSchema from './UserGraphqlSchema'
 import profileSchema from './ProfileGraphqlSchema'
 import playlistSchema from './PlaylistGraphqlSchema'
-import groupSchema from './GroupGraphqlSchema'
+import aliasSchema from './AliasGraphqlSchema'
 import creatorSchema from './CreatorGraphqlSchema'
 import paginationSchema from './PaginationGraphqlSchema'
 import newsletterSchema from './NewsletterGraphqlSchema'
@@ -19,7 +19,7 @@ const { typeDefs, resolvers } = generateTypeDefsAndResolvers({
     userSchema,
     profileSchema,
     playlistSchema,
-    groupSchema,
+    aliasSchema,
     creatorSchema,
     paginationSchema,
     newsletterSchema,

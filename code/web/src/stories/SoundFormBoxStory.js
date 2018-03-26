@@ -28,16 +28,16 @@ export const soundFormBoxStories = moduleArg =>
       },
       data () {
         return {
-          groups: [
-            { _id: 'test1', name: 'Group 1' },
-            { _id: 'test2', name: 'Group 2' }
+          aliases: [
+            { _id: 'test1', name: 'Alias 1' },
+            { _id: 'test2', name: 'Alias 2' }
           ]
         }
       },
       template: `
 <sound-form-box
   username="Hans Peter"
-  :groups="groups"
+  :aliases="aliases"
   :hasFile="true"
   :isUploading="false"
   name=""

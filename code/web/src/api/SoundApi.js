@@ -157,7 +157,7 @@ export const createSound = ({
   name,
   description,
   file,
-  groupId,
+  aliasId,
   creatorId,
   isPublic
 }) =>
@@ -165,14 +165,14 @@ export const createSound = ({
     mutation: gql`
       mutation CreateSound(
         $name: String!
-        $groupId: String
+        $aliasId: String
         $description: String
         $file: FileData!
         $creatorId: String!
         $isPublic: Boolean!
       ) {
         createSound(
-          groupId: $groupId
+          aliasId: $aliasId
           data: {
             name: $name
             creatorId: $creatorId
@@ -185,7 +185,7 @@ export const createSound = ({
         }
       }
     `,
-    variables: { name, description, file, groupId, creatorId, isPublic }
+    variables: { name, description, file, aliasId, creatorId, isPublic }
   })
 
 export const listSoundDefaultQuery = gql`
@@ -251,10 +251,10 @@ export const playlistSoundsQuery = gql`
   ${listSoundWithPaginationFragment}
 `
 
-export const groupSoundsQuery = gql`
-  query GroupSoundsQuery($groupId: String! $skip: Int!) {
+export const aliasSoundsQuery = gql`
+  query AliasSoundsQuery($aliasId: String! $skip: Int!) {
     listSound(
-      filters: [{ key: "group", value: $groupId }]
+      filters: [{ key: "alias", value: $aliasId }]
       pagination: { limit: ${DEFAULT_PAGINATED_SOUND_LIMIT} skip: $skip }
     ) {
       ...ListSoundWithPagination

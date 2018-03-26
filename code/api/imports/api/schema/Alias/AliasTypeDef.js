@@ -1,5 +1,5 @@
-export const GroupTypeDef = `
-type Group {
+export const AliasTypeDef = `
+type Alias {
   _id: String!
   name: String
   # For example collective, label, duo etc.
@@ -16,7 +16,7 @@ type Group {
   playCount: Int
 }
 
-input GroupData {
+input AliasData {
   name: String!
   type: String!
   description: String
@@ -25,15 +25,15 @@ input GroupData {
 }
 
 extend type Query {
-  listGroupForUser(userId: String): [Group]
-  getGroup(_id: String!): Group
+  listAliasForUser(userId: String): [Alias]
+  getAlias(_id: String!): Alias
 }
 
 extend type Mutation {
-  createGroup(data: GroupData!): Group
-  updateGroup(_id: String! data: GroupData!): Group
-  removeGroup(_id: String!): Group
-  followGroup(toFollowId: String!): Group
-  unfollowGroup(toUnfollowId: String!): Group
+  createAlias(data: AliasData!): Alias
+  updateAlias(_id: String! data: AliasData!): Alias
+  removeAlias(_id: String!): Alias
+  followAlias(toFollowId: String!): Alias
+  unfollowAlias(toUnfollowId: String!): Alias
 }
 `

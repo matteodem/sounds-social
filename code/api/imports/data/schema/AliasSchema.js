@@ -1,7 +1,7 @@
 import SimpleSchema from 'simpl-schema'
 import { createdAtAutoValue } from './autoValue/createdAtAutoValue'
 
-export const groupSchema = new SimpleSchema({
+export const aliasSchema = new SimpleSchema({
   name: {
     type: String,
     min: 3,

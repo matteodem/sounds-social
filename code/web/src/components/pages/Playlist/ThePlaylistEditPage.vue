@@ -33,7 +33,7 @@
           <div class="dark-gray i mv3 f5" v-text="$t('Drag and drop to reorder')"></div>
 
           <draggable v-model="formData.sounds"
-                     :options="{group:'sounds'}"
+                     :options="{alias:'sounds'}"
                      @start="isDragging=true"
                      @end="isDragging=false">
             <div v-for="sound in formData.sounds"

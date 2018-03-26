@@ -7,7 +7,7 @@ const initialState = {
   name: '',
   description: '',
   file: {},
-  groupOptionData: [],
+  aliasOptionData: [],
   uploader: 'user',
   userId: '',
   fileId: ''

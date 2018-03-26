@@ -5,8 +5,8 @@ import { addPaginationTypeDef } from '../helpers/PaginationMethods'
 import { soundCollection } from '../../data/collection/SoundCollection'
 import { checkUserIdRequired } from '../../lib/check/checkUserData'
 import { fetchOneFileById } from '../../data/collection/methods/File/fetchOneFileById'
-import { isMemberOfGroup } from '../../data/collection/methods/Group/isMemberOfGroup'
-import { fetchOneGroupById } from '../../data/collection/methods/Group/fetchOneGroupById'
+import { isMemberOfAlias } from '../../data/collection/methods/Alias/isMemberOfAlias'
+import { fetchOneAliasById } from '../../data/collection/methods/Alias/fetchOneAliasById'
 import { fetchOneUserById } from '../../data/collection/methods/User/fetchOneUserById'
 import { createSound } from '../../data/collection/methods/Sound/createSound'
 import { publishSound } from '../../data/collection/methods/Sound/publishSound'
@@ -41,11 +41,11 @@ export default {
       deleteSound: resolver.delete(soundCollection),
       createSound: (root, args, context) => {
         const { userId } = context
-        const { groupId } = args
+        const { aliasId } = args
         checkUserIdRequired(userId)
-        check(groupId, Match.Maybe(String))
+        check(aliasId, Match.Maybe(String))
 
-        return createSound(userId)(args.data)(groupId)
+        return createSound(userId)(args.data)(aliasId)
       },
       publishSound: (root, args, context) => {
         const { userId } = context
@@ -72,16 +72,16 @@ export default {
           }
         }
 
-        const group = fetchOneGroupById(root.creatorId)
+        const alias = fetchOneAliasById(root.creatorId)
 
-        if (group) return { ...group, username: group.name, type: 'group' }
+        if (alias) return { ...alias, username: alias.name, type: 'alias' }
       },
       isRemovable: (root, args, context) => {
         if (!root.ownerType || root.ownerType === 'user') {
           return root.creatorId === context.userId
         }
 
-        return isMemberOfGroup(context.userId, root.creatorId)
+        return isMemberOfAlias(context.userId, root.creatorId)
       },
     },
   },

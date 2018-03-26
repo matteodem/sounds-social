@@ -7,7 +7,7 @@ import { followUser } from '../../data/collection/methods/User/followUser'
 import { fetchOneUserById } from '../../data/collection/methods/User/fetchOneUserById'
 import { unfollowUser } from '../../data/collection/methods/User/unfollowUser'
 import { isFollowedByUser } from '../../data/collection/methods/User/isFollowedByUser'
-import { fetchGroupsForUser } from '../../data/collection/methods/Group/fetchGroupsForUser'
+import { fetchAliasesForUser } from '../../data/collection/methods/Alias/fetchAliasesForUser'
 import { fetchOneProfile } from '../../data/collection/methods/Profile/fetchOneProfile'
 import { fetchUserFollowerCount } from '../../data/collection/methods/User/fetchUserFollowerCount'
 import { fetchCreatorSoundPlayCount } from '../../data/collection/methods/Sound/fetchCreatorSoundPlayCount'
@@ -50,8 +50,8 @@ export default {
         key: ({ _id }) => `playCount${_id}`,
         maxAge: 1000 * 60,
       }),
-      groups: (root, args, context) =>
-        fetchGroupsForUser(root._id)(context.grapherFields),
+      aliases: (root, args, context) =>
+        fetchAliasesForUser(root._id)(context.grapherFields),
     },
   },
   typeDefs: [
@@ -64,7 +64,7 @@ export default {
       canFollow: Boolean
       isFollowedByCurrentUser: Boolean
       profile: Profile!
-      groups: [Group]
+      aliases: [Alias]
       followerCount: Int
       playCount: Int
     }

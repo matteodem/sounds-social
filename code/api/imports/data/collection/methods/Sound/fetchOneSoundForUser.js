@@ -1,5 +1,5 @@
 import { soundCollection } from '../../SoundCollection'
-import { fetchGroupIdsForUser } from '../Group/fetchGroupIdsForUser'
+import { fetchAliasIdsForUser } from '../Alias/fetchAliasIdsForUser'
 
 export const fetchOneSoundForUser = userId => _id => {
   const selector = { _id }
@@ -11,7 +11,7 @@ export const fetchOneSoundForUser = userId => _id => {
       {
         _id,
         creatorId: {
-          $in: [userId, ...fetchGroupIdsForUser(userId)],
+          $in: [userId, ...fetchAliasIdsForUser(userId)],
         },
       },
     ],

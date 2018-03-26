@@ -20,7 +20,7 @@ export const soundSchema = new SimpleSchema({
   ownerType: {
     type: String,
     optional: true,
-    allowedValues: ['group', 'user'], // if empty it's a user
+    allowedValues: ['alias', 'user'], // if empty it's a user
   },
   coverFileId: {
     type: String,

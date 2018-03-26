@@ -1,9 +1,9 @@
-import { fetchGroupIdsForUser } from '../Group/fetchGroupIdsForUser'
+import { fetchAliasIdsForUser } from '../Alias/fetchAliasIdsForUser'
 
 export const selectUserIsCreator = userId => {
   return {
     creatorId: {
-      $in: [userId, ...fetchGroupIdsForUser(userId)],
+      $in: [userId, ...fetchAliasIdsForUser(userId)],
     },
   }
 }

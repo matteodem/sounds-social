@@ -60,7 +60,7 @@
         type: String,
         required: true,
       },
-      groups: {
+      aliases: {
         type: Array,
         default () {
           return []
@@ -98,7 +98,7 @@
       uploaderOptions () {
         return [
           { label: this.username, value: 'user' },
-          ...this.groups.map(group => ({ label: group.name, value: group._id })),
+          ...this.aliases.map(alias => ({ label: alias.name, value: alias._id })),
         ]
       },
     },

@@ -1,14 +1,14 @@
-import { groupCollection } from '../../GroupCollection'
+import { aliasCollection } from '../../AliasCollection'
 import { fileCollection } from '../../FileCollection'
 
-export const createGroup = userId => ({
+export const createAlias = userId => ({
   name,
   type,
   description,
   websiteUrl,
   avatarFile,
 }) => {
-  const groupData = {
+  const aliasData = {
     creatorId: userId,
     memberIds: [userId],
     name,
@@ -18,8 +18,8 @@ export const createGroup = userId => ({
   }
 
   if (avatarFile) {
-    groupData.avatarFileId = fileCollection.insert({ ...avatarFile })
+    aliasData.avatarFileId = fileCollection.insert({ ...avatarFile })
   }
 
-  return groupCollection.insert(groupData)
+  return aliasCollection.insert(aliasData)
 }

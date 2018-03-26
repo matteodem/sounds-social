@@ -29,19 +29,19 @@
           </div>
         </div>
 
-        <group-list
-          @openGroup="$router.push({ name: 'group-detail', params: { id: arguments[0]._id } })"
-          @createGroup="openGroupModal = true"
+        <alias-list
+          @openAlias="$router.push({ name: 'alias-detail', params: { id: arguments[0]._id } })"
+          @createAlias="openAliasModal = true"
           :canCreate="isCurrentUser"
-          :groups="getUser.groups"></group-list>
+          :aliases="getUser.aliases"></alias-list>
 
         <stateful-playlist-list :user-id="getUser._id"></stateful-playlist-list>
 
-        <pure-modal @close="openGroupModal = false" v-show="openGroupModal">
+        <pure-modal @close="openAliasModal = false" v-show="openAliasModal">
           <div class="pa4">
-            <pure-title size="f1" v-text="$t('Create group')"></pure-title>
+            <pure-title size="f1" v-text="$t('Create alias')"></pure-title>
 
-            <stateful-group-form></stateful-group-form>
+            <stateful-alias-form></stateful-alias-form>
           </div>
         </pure-modal>
       </div>
@@ -53,7 +53,7 @@
   import SoundListComponent from '../stateful/sound/StatefulSoundList.vue'
   import StatefulPlaylistList from '../stateful/Playlist/StatefulPlaylistList.vue'
   import StatefulProfileBox from '../stateful/Profile/StatefulUserProfileBox.vue'
-  import StatefulGroupForm from '../stateful/Group/StatefulGroupForm.vue'
+  import StatefulAliasForm from '../stateful/Alias/StatefulAliasForm.vue'
   import { getUserId } from '../../api/AuthApi'
   import { profilePageQuery as query } from '../../api/ProfileApi'
   import { userProfileSoundsQuery } from '../../api/SoundApi'
@@ -64,7 +64,7 @@
       SoundListComponent,
       StatefulPlaylistList,
       StatefulProfileBox,
-      StatefulGroupForm,
+      StatefulAliasForm,
     },
     metaInfo () {
       if (this.getUser) {
@@ -77,7 +77,7 @@
     },
     data () {
       return {
-        openGroupModal: false,
+        openAliasModal: false,
         getUser: null,
         userLoading: 0,
         userId: '',

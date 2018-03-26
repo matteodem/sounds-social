@@ -7,7 +7,7 @@
         :value="formData.name"></pure-input>
     </form-field>
 
-    <form-field :label="`${$t('Type')} (${$t('Label, Group, Collective')}...)`" :error="$v.formData.type">
+    <form-field :label="`${$t('Type')} (${$t('Label, Alias, Collective')}...)`" :error="$v.formData.type">
       <pure-input
         name="type"
         @keyup="changeFormData('type', arguments[0])"
@@ -32,7 +32,7 @@
 
     <div class="mt4">
       <upload-zone
-        :label="$t(`${groupId ? 'Update' : 'Add'} group avatar`)"
+        :label="$t(`${aliasId ? 'Update' : 'Add'} alias avatar`)"
         @upload="uploadAvatarFileImage(arguments[0])"></upload-zone>
 
       <div v-if="hasUploadedFile" class="mt3 i mid-gray"><span v-text="$t('File uploaded')"></span>!</div>
@@ -40,18 +40,18 @@
 
     <div class="mv4">
       <pure-button
-        @click="saveGroup"
+        @click="saveAlias"
         :disabled="$v.$invalid"
         :fill="true"
-        v-text="$t(groupId ? 'Edit group' : 'Create group')"
+        v-text="$t(aliasId ? 'Edit alias' : 'Create alias')"
       ></pure-button>
 
       <div class="dib">
         <pure-confirm-modal-button
-          @confirm="removeGroup"
-          v-if="groupId"
+          @confirm="removeAlias"
+          v-if="aliasId"
           buttonColor="light-red">
-          <div slot="button" v-text="$t('Delete group')"></div>
+          <div slot="button" v-text="$t('Delete alias')"></div>
         </pure-confirm-modal-button>
       </div>
     </div>
@@ -61,14 +61,14 @@
   import { pick } from 'lodash/fp'
   import { url, required, minLength, maxLength } from 'vuelidate/lib/validators'
 
-  import { saveGroup, removeGroup, groupFormDataQuery } from '../../../api/GroupApi'
-  import { addGroupAvatarFile } from '../../../api/StorageApi'
+  import { saveAlias, removeAlias, aliasFormDataQuery } from '../../../api/AliasApi'
+  import { addAliasAvatarFile } from '../../../api/StorageApi'
 
   const pickFields = pick(['name', 'type', 'description', 'websiteUrl'])
 
   export default {
     props: {
-      groupId: {
+      aliasId: {
         type: String,
         default: '',
       },
@@ -85,21 +85,21 @@
       }
     },
     apollo: {
-      groupFormData () {
+      aliasFormData () {
         return {
-          query: groupFormDataQuery,
+          query: aliasFormDataQuery,
           variables () {
-            return { id: this.groupId }
+            return { id: this.aliasId }
           },
-          skip: !this.groupId,
+          skip: !this.aliasId,
           fetchPolicy: 'network-only',
         }
       },
     },
     watch: {
-      groupFormData () {
-        if (this.groupId) {
-          this.formData = pickFields(this.groupFormData)
+      aliasFormData () {
+        if (this.aliasId) {
+          this.formData = pickFields(this.aliasFormData)
         }
       },
     },
@@ -132,25 +132,25 @@
       uploadAvatarFileImage (e) {
         const file = e.target.files[0]
 
-        addGroupAvatarFile(file)
+        addAliasAvatarFile(file)
           .then(({ _id, secret, url }) => {
             this.formData.avatarFile = { _id, secret, url }
             this.hasUploadedFile = !!_id
           })
           .catch(() => alert(this.$t('Wrong file format')))
       },
-      saveGroup () {
+      saveAlias () {
         const { name, type, avatarFile, description, websiteUrl } = this.formData
 
-        saveGroup(this.groupId, name, type, websiteUrl, avatarFile, description)
-          .then(({ data: { group } }) => this.$router.push({
-            name: 'group-detail',
-            params: { id: group._id },
+        saveAlias(this.aliasId, name, type, websiteUrl, avatarFile, description)
+          .then(({ data: { alias } }) => this.$router.push({
+            name: 'alias-detail',
+            params: { id: alias._id },
           }))
       },
-      removeGroup () {
-        removeGroup(this.groupId)
-          .then(({ data: { group } }) => this.$router.push({
+      removeAlias () {
+        removeAlias(this.aliasId)
+          .then(({ data: { alias } }) => this.$router.push({
             name: 'profile-detail',
             params: { id: 'me' },
           }))
