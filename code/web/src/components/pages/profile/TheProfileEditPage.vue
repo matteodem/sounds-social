@@ -25,6 +25,13 @@
             @keyup="changeFormData('description', $event.target.value)"></textarea>
         </form-field>
 
+        <form-field :label="$t('Name')" :error="$v.formData.profileName">
+          <pure-input
+            name="profileName"
+            @keyup="changeFormData('profileName', arguments[0])"
+            :value="formData.profileName"></pure-input>
+        </form-field>
+
         <form-field :label="$t('Website Url')" :error="$v.formData.websiteUrl">
           <pure-input
             name="websiteUrl"
@@ -52,7 +59,7 @@
 </template>
 <script>
   import gql from 'graphql-tag'
-  import { url, maxLength } from 'vuelidate/lib/validators'
+  import { url, maxLength, minLength } from 'vuelidate/lib/validators'
 
   import HeaderComponent from '../../stateful/StatefulHeader.vue'
   import { addProfileAvatarFile } from '../../../api/StorageApi'
@@ -67,6 +74,7 @@
         username
         isFollowedByCurrentUser
         profile {
+          profileName
           description
           websiteUrl
           language
@@ -113,6 +121,10 @@
         description: {
           maxLength: maxLength(180),
         },
+        profileName: {
+          minLength: minLength(3),
+          maxLength: maxLength(40),
+        },
       },
     },
     mounted () {
@@ -122,7 +134,10 @@
           id: this.$route.params.id,
         },
       }).then(({ data }) => {
-        this.formData = this.$_.pick(data.getUser.profile, ['description', 'websiteUrl', 'language'])
+        this.formData = this.$_.pick(
+          data.getUser.profile,
+          ['description', 'websiteUrl', 'language', 'profileName'],
+        )
       })
     },
     methods: {

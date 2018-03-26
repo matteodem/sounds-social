@@ -117,7 +117,7 @@
         type: {
           required,
           minLength: minLength(3),
-          maxLength: maxLength(20),
+          maxLength: maxLength(40),
         },
         description: {
           maxLength: maxLength(280),

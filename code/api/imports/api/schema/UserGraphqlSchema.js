@@ -12,6 +12,7 @@ import { fetchOneProfile } from '../../data/collection/methods/Profile/fetchOneP
 import { fetchUserFollowerCount } from '../../data/collection/methods/User/fetchUserFollowerCount'
 import { fetchCreatorSoundPlayCount } from '../../data/collection/methods/Sound/fetchCreatorSoundPlayCount'
 import { generateCacheKey } from '../helpers/generateCacheKey'
+import { fetchDisplayName } from '../../data/collection/methods/Profile/fetchDisplayName'
 
 export default {
   resolvers: {
@@ -46,6 +47,7 @@ export default {
       followerCount: withCache(flow(get('_id'), fetchUserFollowerCount), {
         key: generateCacheKey('followerCount'),
       }),
+      displayName: flow(get('_id'), fetchDisplayName),
       playCount: withCache(flow(get('_id'), fetchCreatorSoundPlayCount), {
         key: ({ _id }) => `playCount${_id}`,
         maxAge: 1000 * 60,
@@ -61,6 +63,7 @@ export default {
     type User {
       _id: String!
       username: String!
+      displayName: String!
       canFollow: Boolean
       isFollowedByCurrentUser: Boolean
       profile: Profile!

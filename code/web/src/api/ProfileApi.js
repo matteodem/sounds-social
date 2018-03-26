@@ -7,6 +7,7 @@ export const ProfileBoxFieldsFragment = gql`
     username
     isFollowedByCurrentUser
     canFollow
+    displayName
     profile {
       description
       websiteUrl

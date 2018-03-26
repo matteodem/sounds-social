@@ -10,6 +10,7 @@ input ProfileData {
   description: String
   avatarFile: FileData
   language: String
+  profileName: String
 }
 
 type Profile {
@@ -18,6 +19,7 @@ type Profile {
   websiteUrl: String
   avatarFile: File
   language: String
+  profileName: String
 }
 
 extend type Mutation {

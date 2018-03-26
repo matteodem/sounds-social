@@ -22,6 +22,12 @@ export const profileSchema = new SimpleSchema({
     optional: true,
     max: 50,
   },
+  profileName: {
+    type: String,
+    optional: true,
+    min: 3,
+    max: 40,
+  },
   language: {
     type: String,
     optional: true,

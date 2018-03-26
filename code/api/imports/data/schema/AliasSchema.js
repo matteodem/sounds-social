@@ -5,7 +5,7 @@ export const aliasSchema = new SimpleSchema({
   name: {
     type: String,
     min: 3,
-    max: 20,
+    max: 40,
   },
   // label, collective, duo etc.
   type: {
