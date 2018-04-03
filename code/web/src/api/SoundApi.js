@@ -211,7 +211,7 @@ export const listSoundDefaultQuery = gql`
 export const exploreCoversQuery = gql`
   query SoundListQuery {
     exploreCovers: listSound(
-      limit: 8
+      limit: 4
       filters: [
         { key: "user", value: "" }
         { key: "loggedInFeed", value: "false" }

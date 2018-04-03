@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="tc dib-l pt3 mt0-l">
+    <div class="tc dib-l mt0-l">
       <div class="dib v-mid mr4-l mr0" style="font-size: 8rem">
         <pure-icon icon="play-circle"></pure-icon>
         <div class="relative">
