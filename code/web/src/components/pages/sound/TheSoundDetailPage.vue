@@ -93,7 +93,7 @@
   import { detailSoundQuery, removeSound, publishSound } from '../../../api/SoundApi'
   import HeaderComponent from '../../stateful/StatefulHeader.vue'
   import StatefulPlaylistAddModal from '../../stateful/Playlist/StatefulPlaylistAddModal.vue'
-  import { uploadCover } from '../../../api/Sound/SoundCoverApi'
+  // import { uploadCover } from '../../../api/Sound/SoundCoverApi'
   import { mapGraphlDataToSound } from '../../../func/mappers/mapSound'
 
   export default {
@@ -178,11 +178,11 @@
         const file = e.target.files[0]
 
         addCoverFile(file)
-          .then(({ _id, secret, url }) => uploadCover(this.getSound._id, { _id, secret, url }))
+          /* .then(({ _id, secret, url }) => uploadCover(this.getSound._id, { _id, secret, url }))
           .then(() => {
             this.$refs.coverFileUploadButton.modalOpen = false
           })
-          .catch(() => alert(this.$t('Wrong file format')))
+          .catch(() => alert(this.$t('Wrong file format'))) */
       },
     },
   }

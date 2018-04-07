@@ -1,7 +1,7 @@
 {
   "name": "sounds-social-api",
   "version": "1.0.0",
-  "license": "MIT",
+  "license": "GPL-3.0",
   "description": "Graphql API for Sounds Social",
   "author": "Matteo De Micheli <matteodem@protonmail.com>",
   "scripts": {
@@ -24,6 +24,7 @@
     "body-parser": "^1.18.2",
     "cors": "^2.8.1",
     "express": "^4.16.2",
+    "formidable": "^1.2.1",
     "graphql": "^0.13.1",
     "graphql-add-middleware": "^0.1.5",
     "graphql-loader": "^1.2.1",
@@ -32,6 +33,7 @@
     "graphql-server-express": "^1.3.2",
     "graphql-tag": "^2.8.0",
     "graphql-tools": "^2.21.0",
+    "ipfs": "^0.28.2",
     "join-mongo": "0.0.1",
     "jquery": "^3.3.1",
     "lodash": "^4.17.5",

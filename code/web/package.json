@@ -2,7 +2,7 @@
   "name": "sounds-social-web",
   "version": "1.0.0",
   "description": "Web UI for Sounds Social",
-  "license": "MIT",
+  "license": "GPL-3.0",
   "author": "Matteo De Micheli <matteodem@protonmail.com>",
   "scripts": {
     "dev": "node build/dev-server.js",

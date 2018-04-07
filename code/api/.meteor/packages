@@ -33,3 +33,5 @@ cfs:filesystem
 nicolaslopezj:apollo-accounts
 aldeed:collection2@3.0.0
 aldeed:schema-index
+nimble:restivus
+meteorhacks:async
