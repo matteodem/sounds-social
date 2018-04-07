@@ -8,7 +8,7 @@
       <div class="min-vh-100 cover items-center bg-gradient-blue" style="display: grid;">
         <div class="cf">
           <div class="fl w-50-l w-100 ph2 pv0-l pv2">
-            <div class="center bg-blue white tc vh-50 br2 items-center justify-center" style="min-height: 480px; display: grid">
+            <div class="center bg-blue white tc vh-50 br2 items-center justify-center shadow-1" style="min-height: 480px; display: grid">
               <pure-identity-header></pure-identity-header>
 
               <div class="center">
@@ -32,7 +32,7 @@
             </div>
           </div>
           <div class="fl w-50-l w-100 mt0-l ph2 pv0-l pv2">
-            <div class="bg-white pa3 center vh-50 br2 items-center justify-center" style="min-height: 480px; display: grid">
+            <div class="bg-white pa3 center vh-50 br2 items-center justify-center shadow-1"  style="min-height: 480px; display: grid">
               <div style="width: 45vw">
                 <stateful-sound-explore-covers></stateful-sound-explore-covers>
 
