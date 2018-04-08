@@ -1,5 +1,4 @@
 import fs from 'fs'
-import { trim } from 'lodash/fp'
 import { Random } from 'meteor/random'
 import { Restivus } from 'meteor/nimble:restivus'
 import { Async } from 'meteor/meteorhacks:async'
@@ -36,7 +35,10 @@ const parseAndUploadFiles = ({
 }) => {
   form.parse(request, (err, fields, files) => {
     fs.readFile(files.data.path, (err, data) => {
-      if (err) throw new Error(err.message)
+      if (err) {
+        throw new Error(err.message)
+      }
+
       ipfsFileStorage
         .store({
           content: data,
