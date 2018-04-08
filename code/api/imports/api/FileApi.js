@@ -34,10 +34,10 @@ const parseAndUploadFiles = ({
   user,
 }) => {
   form.parse(request, (err, fields, files) => {
+    if (err) throw new Error(err.message)
+
     fs.readFile(files.data.path, (err, data) => {
-      if (err) {
-        throw new Error(err.message)
-      }
+      if (err) throw new Error(err.message)
 
       ipfsFileStorage
         .store({
