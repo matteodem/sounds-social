@@ -6,8 +6,8 @@ export const addSoundCoverFileResolver = (root, args, context) => {
   check(soundId, String)
   check(fileData, {
     _id: String,
-    secret: String,
-    url: String,
+    hash: String,
+    userId: String,
   })
 
   return updateSoundCover(context.userId)(soundId)(fileData)

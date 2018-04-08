@@ -10,12 +10,10 @@ export const getNode = async () => {
 
   node = new IPFS()
 
-  await new Promise(resolve => node.on('ready', res))
+  await new Promise(resolve => node.on('ready', resolve))
 
   return await getNode()
 }
-
-getNode() // initialize
 
 export const ipfsFileStorage = {
   crypto: {
@@ -36,14 +34,14 @@ export const ipfsFileStorage = {
     const buffer = ipfsFileStorage.crypto.encrypt(content, passphrase)
 
     return await new Promise(resolve =>
-      node.files.add({ content: buffer, path }, (err, data) => res(data))
+      node.files.add({ content: buffer, path }, (err, data) => resolve(data))
     )
   },
   find: async (hash, passphrase) => {
     const node = await getNode()
 
     const content = await new Promise(resolve =>
-      node.files.cat(hash, (err, file) => res(file))
+      node.files.cat(hash, (err, file) => resolve(file))
     )
 
     return ipfsFileStorage.crypto.decrypt(content, passphrase)

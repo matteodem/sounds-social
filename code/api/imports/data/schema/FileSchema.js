@@ -1,10 +1,10 @@
 import SimpleSchema from 'simpl-schema'
 
 export const fileSchema = new SimpleSchema({
-  secret: {
+  hash: {
     type: String,
   },
-  url: {
+  userId: {
     type: String,
   },
 })

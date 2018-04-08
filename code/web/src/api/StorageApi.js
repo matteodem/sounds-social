@@ -6,12 +6,15 @@ const uploadFile = (file, type) => {
   data.append('data', file)
 
   // use the file endpoint
-  return fetch(`${apiEndpointUrl}/file-api/${type}`, {
-    method: 'POST',
-    body: data
-  })
-    .then(response => response.json())
-    .then(({ id: _id, secret, url }) => ({ _id, secret, url }))
+  return fetch(
+    `${apiEndpointUrl}/file-api/${type}?userLoginToken=${localStorage.getItem(
+      'Meteor.loginToken'
+    )}`,
+    {
+      method: 'POST',
+      body: data
+    }
+  ).then(response => response.json())
 }
 
 const uploadImageFile = async file => {
