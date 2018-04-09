@@ -7,7 +7,7 @@ import { createUserPassphraseIfNeeded } from '../data/collection/methods/User/cr
 import { fetchOneUserById } from '../data/collection/methods/User/fetchOneUserById'
 import { webUrlString } from '../config/AccessData'
 import { resolvePromiseForCallback } from '../lib/resolvePromiseForCallback'
-import { getRequiredUserFromToken } from './helpers/getRequiredUserFromToken'
+import { getRequiredUserFromToken } from '../lib/User/getRequiredUserFromToken'
 import { parseAndUploadFiles } from './FileApi/parseAndUploadFiles'
 
 const formidable = require('formidable')

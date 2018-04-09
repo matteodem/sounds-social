@@ -11,8 +11,8 @@ describe('checkSoundData', function() {
       isPublic: true,
       file: {
         _id: 'fileId',
-        secret: 'fileSecret',
-        url: 'http://fileUrl',
+        hash: 'fileSecret',
+        userId: 'userId',
       },
     })
   })
@@ -27,8 +27,8 @@ describe('checkSoundData', function() {
         isPublic: true,
         file: {
           _id: 'fileId',
-          secret: 'fileSecret',
-          url: 'http://fileUrl',
+          hash: 'fileSecret',
+          userId: 'userId',
         },
       })
     } catch (e) {
