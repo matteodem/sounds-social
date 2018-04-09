@@ -80,7 +80,7 @@ Api.addRoute(':type', {
 
         const { username } = user
 
-        if (username.includes('/')) return done('Invalid username')
+        if (username.includes('/') || type.includes('/')) { return done('Invalid data') }
 
         createUserPassphraseIfNeeded(user._id)
 
