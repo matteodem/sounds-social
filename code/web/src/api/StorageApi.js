@@ -23,9 +23,7 @@ const uploadImageFile = async file => {
 }
 
 export const addProfileAvatarFile = uploadImageFile
-
 export const addAliasAvatarFile = uploadImageFile
-
 export const addCoverFile = uploadImageFile
 
 export const addMusicFile = async file => {
