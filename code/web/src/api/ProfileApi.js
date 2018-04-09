@@ -14,6 +14,7 @@ export const ProfileBoxFieldsFragment = gql`
       avatarFile {
         url
       }
+      type
     }
     followerCount
     playCount

@@ -6,7 +6,7 @@
     <div slot="main">
       <div v-if="singleAlias">
         <pure-title v-text="singleAlias.name"></pure-title>
-        <h2 class="f3 f2-ns mv3 gray" v-text="singleAlias.type"></h2>
+        <h2 class="f3 f2-ns mv3 gray" v-if="singleAlias.type" v-text="singleAlias.type"></h2>
         <sound-list-component
           :query="aliasSoundsQuery"
           :defineQueryVariables="defineSoundListQueryVariables"></sound-list-component>

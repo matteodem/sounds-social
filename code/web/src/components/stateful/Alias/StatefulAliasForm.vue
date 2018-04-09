@@ -115,7 +115,6 @@
           maxLength: maxLength(50),
         },
         type: {
-          required,
           minLength: minLength(3),
           maxLength: maxLength(40),
         },

@@ -81,7 +81,7 @@ export default {
           return root.creatorId === context.userId
         }
 
-        return isMemberOfAlias(context.userId, root.creatorId)
+        return isMemberOfAlias(context.userId)(root.creatorId)
       },
     },
   },

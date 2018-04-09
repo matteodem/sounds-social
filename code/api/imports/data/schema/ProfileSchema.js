@@ -3,6 +3,9 @@ import SimpleSchema from 'simpl-schema'
 export const profileSchema = new SimpleSchema({
   type: {
     type: String,
+    optional: true,
+    min: 3,
+    max: 40,
   },
   referenceId: {
     type: String,

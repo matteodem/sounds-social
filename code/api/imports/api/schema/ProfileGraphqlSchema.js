@@ -11,6 +11,7 @@ input ProfileData {
   avatarFile: FileData
   language: String
   profileName: String
+  type: String
 }
 
 type Profile {

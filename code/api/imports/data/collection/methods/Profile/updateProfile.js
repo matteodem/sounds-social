@@ -3,10 +3,7 @@ import { profileCollection } from '../../ProfileCollection'
 import { fileCollection } from '../../FileCollection'
 
 export const updateProfile = referenceId => profileData => {
-  const selector = {
-    referenceId,
-    type: 'user', // FIXME type is not needed
-  }
+  const selector = { referenceId }
   const existingProfile = profileCollection.findOne(selector)
 
   const { avatarFile } = profileData

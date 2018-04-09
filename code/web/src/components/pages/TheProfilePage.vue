@@ -6,8 +6,8 @@
     <div slot="main">
       <div v-if="getUser">
         <pure-title v-text="getUser.displayName"></pure-title>
-        <div v-if="isCurrentUser">
-          <h2 class="f3 f2-ns mv3 gray" v-text="`(${$t('this is you')})`"></h2>
+        <div v-if="getUser.profile.type">
+          <h2 class="f3 f2-ns mv3 gray" v-text="getUser.profile.type"></h2>
         </div>
         <sound-list-component
           :query="userProfileSoundsQuery"

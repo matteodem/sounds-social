@@ -32,6 +32,13 @@
             :value="formData.profileName"></pure-input>
         </form-field>
 
+        <form-field :label="$t('Type')" :error="$v.formData.type">
+          <pure-input
+            name="type"
+            @keyup="changeFormData('type', arguments[0])"
+            :value="formData.type"></pure-input>
+        </form-field>
+
         <form-field :label="$t('Website Url')" :error="$v.formData.websiteUrl">
           <pure-input
             name="websiteUrl"
@@ -78,6 +85,7 @@
           description
           websiteUrl
           language
+          type
         }
       }
     }
@@ -121,6 +129,10 @@
         description: {
           maxLength: maxLength(180),
         },
+        type: {
+          minLength: minLength(3),
+          maxLength: maxLength(40),
+        },
         profileName: {
           minLength: minLength(3),
           maxLength: maxLength(40),
@@ -136,7 +148,7 @@
       }).then(({ data }) => {
         this.formData = this.$_.pick(
           data.getUser.profile,
-          ['description', 'websiteUrl', 'language', 'profileName'],
+          ['description', 'websiteUrl', 'type', 'language', 'profileName'],
         )
       })
     },
