@@ -1,5 +1,4 @@
 import { gunzip } from 'zlib'
-import { Random } from 'meteor/random'
 import { Restivus } from 'meteor/nimble:restivus'
 import { Async } from 'meteor/meteorhacks:async'
 import { ipfsFileStorage } from '../data/ipfs/IPFSFileStorage'

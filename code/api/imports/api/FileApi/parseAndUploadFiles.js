@@ -1,5 +1,6 @@
 import fs from 'fs'
 import { gzip } from 'zlib'
+import { Random } from 'meteor/random'
 import { ipfsFileStorage } from '../../data/ipfs/IPFSFileStorage'
 import { resolvePromiseForCallback } from '../../lib/resolvePromiseForCallback'
 
