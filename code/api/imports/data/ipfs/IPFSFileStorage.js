@@ -42,11 +42,12 @@ export const ipfsFileStorage = {
   find: async (hash, passphrase) => {
     const node = await getNode()
 
-    const content = await new Promise(resolve =>
+    const content = await new Promise((resolve, reject) => {
       node.files.cat(hash, (err, file) => {
-        if (!err) resolve(file)
+        if (err) reject()
+        else resolve(file)
       })
-    )
+    })
 
     return ipfsFileStorage.crypto.decrypt(content, passphrase)
   },

@@ -9,6 +9,12 @@ export const webUrl = isDevelopment
   }
   : { host: 'sounds-social-dev.surge.sh', port: '', protocol: 'https' }
 
+const optionalWebUrlPort = webUrl.port ? `:${webUrl.port}` : ''
+
+export const webUrlString = `${webUrl.protocol}://${
+  webUrl.host
+}${optionalWebUrlPort}`
+
 export const apiUrlString = isDevelopment
   ? 'http://localhost:3000'
   : 'https://sounds-social-dev.eu.meteorapp.com/'

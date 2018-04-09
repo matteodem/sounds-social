@@ -145,8 +145,8 @@
         const file = e.target.files[0]
 
         addProfileAvatarFile(file)
-          .then(({ _id, secret, url }) => {
-            this.formData.avatarFile = { _id, secret, url }
+          .then(({ result: { _id, hash, userId } }) => {
+            this.formData.avatarFile = { _id, hash, userId }
             this.hasUploadedFile = !!_id
           })
           .catch(() => alert(this.$t('Wrong file format')))

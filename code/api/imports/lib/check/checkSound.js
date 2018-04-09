@@ -14,7 +14,7 @@ export const checkSoundData = checkRequired({
   isPublic: Boolean,
   file: {
     _id: String,
-    secret: String,
-    url: String,
+    hash: String,
+    userId: String,
   },
 })

@@ -60,8 +60,8 @@
         changeIsUploading(true)
 
         addMusicFile(file)
-          .then(({ _id, secret, url }) => {
-            this.changeField('file')({ _id, secret, url })
+          .then(({ result: { _id, hash, userId } }) => {
+            this.changeField('file')({ _id, hash, userId })
             this.changeField('fileId')(_id)
             changeIsUploading(false)
           })

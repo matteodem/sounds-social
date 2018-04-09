@@ -6,6 +6,7 @@ import { getUserForContext } from 'meteor/apollo'
 import { ipfsFileStorage } from '../data/ipfs/IPFSFileStorage'
 import { createUserPassphraseIfNeeded } from '../data/collection/methods/User/createUserPassphraseIfNeeded'
 import { fetchOneUserById } from '../data/collection/methods/User/fetchOneUserById'
+import { webUrlString } from '../config/AccessData'
 
 const formidable = require('formidable')
 
@@ -106,6 +107,7 @@ Api.addRoute('retrieve/:userId/:hash', {
     })
 
     if (content.result) {
+      this.response.setHeader('Access-Control-Allow-Origin', webUrlString)
       this.response.write(content.result)
       this.done()
     }
