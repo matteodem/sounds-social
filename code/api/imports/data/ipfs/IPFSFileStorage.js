@@ -44,7 +44,7 @@ export const ipfsFileStorage = {
 
     const content = await new Promise((resolve, reject) => {
       node.files.cat(hash, (err, file) => {
-        if (err) reject()
+        if (err) reject(err)
         else resolve(file)
       })
     })

@@ -1,4 +1,5 @@
 import fs from 'fs'
+import { gzip, gunzip } from 'zlib'
 import { Random } from 'meteor/random'
 import { Restivus } from 'meteor/nimble:restivus'
 import { Async } from 'meteor/meteorhacks:async'
@@ -7,6 +8,7 @@ import { ipfsFileStorage } from '../data/ipfs/IPFSFileStorage'
 import { createUserPassphraseIfNeeded } from '../data/collection/methods/User/createUserPassphraseIfNeeded'
 import { fetchOneUserById } from '../data/collection/methods/User/fetchOneUserById'
 import { webUrlString } from '../config/AccessData'
+import { resolvePromiseForCallback } from '../lib/resolvePromiseForCallback'
 
 const formidable = require('formidable')
 
@@ -40,22 +42,28 @@ const parseAndUploadFiles = ({
     fs.readFile(files.data.path, (err, data) => {
       if (err) throw new Error(err.message)
 
-      ipfsFileStorage
-        .store({
-          content: data,
-          path: `/${username}/${type}/${Random.id()}`,
-          passphrase: passphrase,
-        })
-        .then(files => {
-          const lastFile = files[files.length - 1]
+      const promise = new Promise((resolve, reject) => {
+        gzip(data, resolvePromiseForCallback(resolve, reject))
+      })
 
-          done(null, {
-            _id: Random.id(),
-            userId: user._id,
-            hash: lastFile.hash,
+      promise.then(zippedContent => {
+        ipfsFileStorage
+          .store({
+            passphrase,
+            content: zippedContent,
+            path: `/${username}/${type}/${Random.id()}`,
           })
-        })
-        .catch(e => done(e.message))
+          .then(files => {
+            const lastFile = files[files.length - 1]
+
+            done(null, {
+              _id: Random.id(),
+              userId: user._id,
+              hash: lastFile.hash,
+            })
+          })
+          .catch(e => done(e.message))
+      })
     })
   })
 }
@@ -102,6 +110,11 @@ Api.addRoute('retrieve/:userId/:hash', {
 
       ipfsFileStorage
         .find(this.urlParams.hash, user.passphrase)
+        .then(zippedContent => {
+          return new Promise((resolve, reject) => {
+            gunzip(zippedContent, resolvePromiseForCallback(resolve, reject))
+          })
+        })
         .then(content => done(null, content))
         .catch(e => done(`could not decrypt: ${e.message}`))
     })
