@@ -1,5 +1,5 @@
 import { defaultTo, flow, get } from 'lodash/fp'
-import { withCache } from 'graphql-resolver-cache-key-config' // FIXME use original pkg once in there
+import { withCache } from 'graphql-resolver-cache'
 import { check } from 'meteor/check'
 import { resolver, typeDef } from 'meteor/easy:graphqlizer'
 import { userCollection } from '../../data/collection/UserCollection'

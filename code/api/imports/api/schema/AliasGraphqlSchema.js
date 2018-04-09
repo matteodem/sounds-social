@@ -1,6 +1,6 @@
 import { flow, get, map } from 'lodash/fp'
 import { check } from 'meteor/check'
-import { withCache } from 'graphql-resolver-cache-key-config' // FIXME use original pkg once in there
+import { withCache } from 'graphql-resolver-cache'
 import { fetchOneFileById } from '../../data/collection/methods/File/fetchOneFileById'
 import { fetchOneUserById } from '../../data/collection/methods/User/fetchOneUserById'
 import { followAlias } from '../../data/collection/methods/Alias/followAlias'
