@@ -28,7 +28,11 @@ Api.addRoute(':type', {
 
         const { username } = user
 
-        if (username.includes('/') || type.includes('/')) {
+        if (
+          username.includes('/') ||
+          type.includes('/') ||
+          !['sound', 'image'].includes(type)
+        ) {
           return done('Invalid data')
         }
 

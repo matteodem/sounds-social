@@ -18,3 +18,7 @@ export const webUrlString = `${webUrl.protocol}://${
 export const apiUrlString = isDevelopment
   ? 'http://localhost:3000'
   : 'https://sounds-social-dev.eu.meteorapp.com/'
+
+export const convertAudioUrlString = isDevelopment
+  ? 'http://localhost:49000'
+  : 'https://convert-audio-jloyyetbkd.now.sh'

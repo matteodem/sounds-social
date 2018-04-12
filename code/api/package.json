@@ -40,6 +40,7 @@
     "moment": "^2.21.0",
     "niceware": "^1.0.5",
     "node-fetch": "^2.1.1",
+    "request": "^2.85.0",
     "simpl-schema": "^1.4.2"
   },
   "devDependencies": {
