@@ -17,6 +17,16 @@ import { fetchCreatorSoundPlayCount } from '../../data/collection/methods/Sound/
 import { AliasTypeDef } from './Alias/AliasTypeDef'
 import { isCreatorResolver } from './general/isCreatorResolver'
 
+const doUserAliasMethod = userMethod => argIdKey => (root, args, context) => {
+  if (!context.userId) return null
+
+  const aliasId = args[argIdKey]
+  check(aliasId, String)
+
+  userMethod(aliasId)(context.userId)
+  return fetchOneAliasById(aliasId)
+}
+
 export default {
   typeDefs: [AliasTypeDef],
   resolvers: {
@@ -72,24 +82,8 @@ export default {
 
         return alias
       },
-      followAlias(root, args, context) {
-        if (!context.userId) return null
-
-        const { toFollowId } = args
-        check(toFollowId, String)
-
-        followAlias(toFollowId)(context.userId)
-        return fetchOneAliasById(toFollowId)
-      },
-      unfollowAlias(root, args, context) {
-        if (!context.userId) return null
-
-        const { toUnfollowId } = args
-        check(toUnfollowId, String)
-
-        unfollowAlias(toUnfollowId)(context.userId)
-        return fetchOneAliasById(toUnfollowId)
-      },
+      followAlias: doUserAliasMethod(followAlias)('toFollowId'),
+      unfollowAlias: doUserAliasMethod(unfollowAlias)('toUnfollowId'),
     },
   },
 }

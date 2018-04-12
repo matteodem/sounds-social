@@ -14,6 +14,14 @@ import { fetchCreatorSoundPlayCount } from '../../data/collection/methods/Sound/
 import { generateCacheKey } from '../helpers/generateCacheKey'
 import { fetchDisplayName } from '../../data/collection/methods/Profile/fetchDisplayName'
 
+const doUserMethod = userMethod => argIdKey => (root, args, context) => {
+  const userId = args[argIdKey]
+  check(userId, String)
+
+  userMethod(userId)(context.userId)
+  return fetchOneUserById(context.userId)
+}
+
 export default {
   resolvers: {
     Query: {
@@ -23,20 +31,8 @@ export default {
         flow(get('userId'), fetchOneUserById)(context),
     },
     Mutation: {
-      followUser: (root, args, context) => {
-        const { toFollowId } = args
-        check(toFollowId, String)
-
-        followUser(toFollowId)(context.userId)
-        return fetchOneUserById(context.userId)
-      },
-      unfollowUser: (root, args, context) => {
-        const { toUnfollowId } = args
-        check(toUnfollowId, String)
-
-        unfollowUser(toUnfollowId)(context.userId)
-        return fetchOneUserById(context.userId)
-      },
+      followUser: doUserMethod(followUser)('toFollowId'),
+      unfollowUser: doUserMethod(unfollowUser)('toUnfollowId'),
     },
     User: {
       canFollow: (root, args, context) =>
