@@ -1,31 +1,23 @@
 import { constant, get } from 'lodash/fp'
 import { Index, MongoDBEngine } from 'meteor/easysearch:core'
-import { findRelatedFieldDocuments } from './findRelatedFieldDocuments'
 import { soundCollection } from '../collection/SoundCollection'
 import { aliasCollectionName } from '../collection/AliasCollection'
 import { userCollectionName } from '../collection/UserCollection'
 import { selectUserIsCreator } from '../collection/methods/Sound/selectUserIsCreator'
 import { selectIsPublic } from '../collection/methods/general/selectIsPublic'
+import { findRelatedSoundAuthor } from './findRelatedSoundAuthor'
 
-const searchByUsername = (config, query, cb) =>
-  findRelatedFieldDocuments({
-    collection: soundCollection,
-    selector: config.selectorPerField('aggregatedAuthor.username', query),
-    from: userCollectionName,
-    localField: 'creatorId',
-    foreignField: '_id',
-    as: 'aggregatedAuthor',
-  })
+const searchByUsername = findRelatedSoundAuthor({
+  selectorField: 'aggregatedAuthor.username',
+  authorCollection: userCollectionName,
+  asName: 'aggregatedAuthor',
+})
 
-const searchByAliasName = (config, query, cb) =>
-  findRelatedFieldDocuments({
-    collection: soundCollection,
-    selector: config.selectorPerField('aggregatedAliasAuthor.name', query),
-    from: aliasCollectionName,
-    localField: 'creatorId',
-    foreignField: '_id',
-    as: 'aggregatedAliasAuthor',
-  })
+const searchByAliasName = findRelatedSoundAuthor({
+  selectorField: 'aggregatedAliasAuthor.name',
+  authorCollection: aliasCollectionName,
+  asName: 'aggregatedAliasAuthor',
+})
 
 export const soundSearchIndex = new Index({
   collection: soundCollection,
