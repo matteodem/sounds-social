@@ -1,21 +1,22 @@
-export const keepAfter = compare => collection =>
-  collection.reduce(
-    (acc, item) => {
-      if (compare(item)) {
-        return {
-          hasFoundItem: true,
-          items: [item]
-        }
-      }
+const reduceItemsAfterCompare = compare => (accumulatedItems, item) => {
+  if (accumulatedItems.keep) {
+    return {
+      ...accumulatedItems,
+      items: [...accumulatedItems.items, item]
+    }
+  }
 
-      if (acc.hasFoundItem) {
-        return {
-          ...acc,
-          items: [...acc.items, item]
-        }
-      }
+  const keepItems = compare(item)
 
-      return acc
-    },
-    { hasFoundItem: false, items: [] }
-  ).items
+  if (keepItems) {
+    return {
+      keep: true,
+      items: [item]
+    }
+  }
+
+  return accumulatedItems
+}
+
+export const keepAfter = compare => items =>
+  items.reduce(reduceItemsAfterCompare(compare), { items: [] }).items
