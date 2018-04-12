@@ -39,19 +39,21 @@ export const playSound = url => {
   if (isMuted) muteSound()
 }
 
+const updateSoundData = update => () => {
+  const { seek, duration, isPlaying } = currentSoundData
+
+  if (hasPaused) return null
+
+  if (seek === 0 && !isPlaying) {
+    update('done')
+    currentSoundData.seek = null
+  } else if (isNumber(seek)) {
+    update('soundPosition', { duration, seek })
+  }
+}
+
 export const onPlayerEvent = emit => {
-  setInterval(() => {
-    const { seek, duration, isPlaying } = currentSoundData
-
-    if (hasPaused) return null
-
-    if (seek === 0 && !isPlaying) {
-      emit('done')
-      currentSoundData.seek = null
-    } else if (isNumber(seek)) {
-      emit('soundPosition', { duration, seek })
-    }
-  }, 50)
+  setInterval(updateSoundData(emit), 50)
 }
 
 export const continueCurrentSound = () => {
