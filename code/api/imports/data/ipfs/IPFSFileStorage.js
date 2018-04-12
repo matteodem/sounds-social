@@ -15,18 +15,16 @@ export const getNode = async () => {
   return getNode()
 }
 
+const updateWithCipher = cipherMethod => (buffer, passphrase) => {
+  const cipher = cipherMethod(defaultAlgorithm, passphrase)
+
+  return Buffer.concat([cipher.update(buffer), cipher.final()])
+}
+
 export const ipfsFileStorage = {
   crypto: {
-    encrypt(buffer, passphrase) {
-      const cipher = crypto.createCipher(defaultAlgorithm, passphrase)
-
-      return Buffer.concat([cipher.update(buffer), cipher.final()])
-    },
-    decrypt(buffer, passphrase) {
-      const decipher = crypto.createDecipher(defaultAlgorithm, passphrase)
-
-      return Buffer.concat([decipher.update(buffer), decipher.final()])
-    },
+    encrypt: updateWithCipher(crypto.createCipher),
+    decrypt: updateWithCipher(crypto.createDecipher),
   },
   store: async ({ content, path, passphrase }) => {
     const node = await getNode()
