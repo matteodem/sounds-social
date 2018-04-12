@@ -1,33 +1,28 @@
-import { find, findKey, filter, clone, defaultTo, constant } from 'lodash/fp'
-import shuffleSeed from 'shuffle-seed'
-import moment from 'moment'
-
+import { clone, constant, filter, find, findKey, flow, get } from 'lodash/fp'
 import {
-  playSound,
   continueCurrentSound,
-  pauseCurrentSound,
   muteSound,
-  unmuteSound,
-  seekCurrentSound
+  pauseCurrentSound,
+  playSound,
+  seekCurrentSound,
+  unmuteSound
 } from '../func/SoundPlayer'
-import { startPlayingSound, countPlayingSound } from '../api/SoundApi'
+import { countPlayingSound, startPlayingSound } from '../api/SoundApi'
 import {
-  LOOP_SINGLE_MODE,
+  isValidMode,
   LOOP_MODE,
-  RANDOM_MODE,
-  isValidMode
+  LOOP_SINGLE_MODE,
+  RANDOM_MODE
 } from '../constants/PlayerConstants'
 import { collectionHasPlaylistFields } from '../func/collectionHasFields'
+import { playerPlayRelativeByKeyIndex } from './StoreSoundPlayerModule/playRelativeByKeyIndex'
+import { convertSoundPositionToPlayTime } from './StoreSoundPlayerModule/convertSoundPositionToPlayTime'
+import { getDecimalSoundProgress } from './StoreSoundPlayerModule/getDecimalSoundProgress'
+import { getSoundsList } from './StoreSoundPlayerModule/getSoundsList'
 
+export const findSoundKeyById = soundId =>
+  findKey(sound => sound.id === soundId)
 const findSoundById = soundId => find(sound => sound.id === soundId)
-const findSoundKeyById = soundId => findKey(sound => sound.id === soundId)
-
-const changeSoundByKeyIfExists = ({ sounds, dispatch, keyToPlay }) => {
-  if (sounds[keyToPlay]) {
-    dispatch('changeSoundToPlay', { soundId: sounds[keyToPlay].id })
-  } else dispatch('pause')
-}
-
 const hasSounds = state => state.sounds.length > 0
 
 const filterOutSoundById = soundIdToFilter =>
@@ -58,26 +53,12 @@ export const soundPlayerModule = {
   state: clone(initialState),
 
   getters: {
-    soundPlayingTime: state =>
-      moment({
-        seconds: state.soundPosition.seek % 60,
-        minutes: Math.floor(state.soundPosition.seek / 60),
-        hours: Math.floor(state.soundPosition.seek / 60 / 60)
-      }).format('HH:mm:ss'),
-    seekRelativeDecimal: state => {
-      const { seek, duration } = state.soundPosition
-
-      if (seek === 0) return 0
-
-      return seek / defaultTo(1)(duration)
-    },
-    soundPlayerSounds: state => {
-      if (state.mode === RANDOM_MODE) {
-        return shuffleSeed.shuffle(state.sounds, state.randomSeed)
-      }
-
-      return state.sounds
-    }
+    soundPlayingTime: flow(
+      get('soundPosition.seek'),
+      convertSoundPositionToPlayTime
+    ),
+    seekRelativeDecimal: flow(get('soundPosition'), getDecimalSoundProgress),
+    soundPlayerSounds: state => getSoundsList(state)
   },
 
   actions: {
@@ -162,6 +143,10 @@ export const soundPlayerModule = {
       }
 
       if (!isNaN(currentPositionIndex) && state.sounds[newPositionIndex]) {
+        console.log({
+          newPositionIndex,
+          currentPositionIndex
+        })
         commit('MOVE_SOUND_PLAYER_POSITION', {
           newPositionIndex,
           currentPositionIndex
@@ -201,12 +186,8 @@ export const soundPlayerModule = {
       commit('CHANGE_SEEK', { seek: newSeek })
     },
     playerStepForward: ({ dispatch }) => dispatch('playerPlayNext'),
-    playerPlayNext: ({ state, getters, dispatch }) => {
-      const { soundPlayerSounds: sounds } = getters
-      const key = parseInt(findSoundKeyById(state.currentId)(sounds), 10)
-
-      changeSoundByKeyIfExists({ sounds, dispatch, keyToPlay: key + 1 })
-    },
+    playerPlayNext: playerPlayRelativeByKeyIndex(1),
+    playerPlayPrevious: playerPlayRelativeByKeyIndex(-1),
     playerStepBackward: ({ dispatch, state, getters }) => {
       if (
         state.soundPosition.seek < 5 &&
@@ -216,12 +197,6 @@ export const soundPlayerModule = {
       } else {
         dispatch('playNew')
       }
-    },
-    playerPlayPrevious: ({ state, getters, dispatch }) => {
-      const { soundPlayerSounds: sounds } = getters
-      const key = parseInt(findSoundKeyById(state.currentId)(sounds), 10)
-
-      changeSoundByKeyIfExists({ sounds, dispatch, keyToPlay: key - 1 })
     },
     mutePlayer: ({ commit }) => {
       muteSound()
@@ -270,16 +245,10 @@ export const soundPlayerModule = {
       { newPositionIndex, currentPositionIndex }
     ) {
       const soundToMove = state.sounds[currentPositionIndex]
-      const soundToBeMoved = state.sounds[newPositionIndex]
 
-      const movedSoundIds = [soundToMove, soundToBeMoved].map(sound => sound.id)
-
-      state.sounds = state.sounds.filter(
-        sound => !movedSoundIds.includes(sound.id)
-      )
-
-      state.sounds.splice(newPositionIndex, 0, soundToMove)
-      state.sounds.splice(currentPositionIndex, 0, soundToBeMoved)
+      state.sounds[currentPositionIndex] = state.sounds[newPositionIndex]
+      state.sounds[newPositionIndex] = soundToMove
+      state.sounds = state.sounds.sort()
     },
     CHANGE_CURRENT_SOUND_ID (state, soundId) {
       state.currentId = soundId
