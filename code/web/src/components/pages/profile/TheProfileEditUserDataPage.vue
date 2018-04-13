@@ -32,7 +32,6 @@
       <pure-button class="mt4" @click="$routeNavigator.openProfileEdit($route.params.id, 'user')"
                    v-text="$t('Back to profile settings')"></pure-button>
 
-      <!-- TODO: reuse h2 titles: modal-title component -->
       <pure-modal @close="abortDeleteProcess" v-if="openModalId === 'explain'">
         <div class="pa4">
           <div class="lh-copy">
