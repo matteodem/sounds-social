@@ -4,6 +4,7 @@ import { Restivus } from 'meteor/nimble:restivus'
 import { webUrlString } from '../config/AccessData'
 import { runAsyncWithUser } from './helpers/runAsyncWithUser'
 import { getUserExportData } from '../data/collection/methods/User/getUserExportData'
+import { deleteUser } from '../data/collection/methods/User/deleteUser'
 
 const Api = new Restivus({
   prettyJson: true,
@@ -48,5 +49,22 @@ Api.addRoute('passphrase/:token', {
     return {
       passphrase: result,
     }
+  },
+})
+
+Api.addRoute('delete/:token', {
+  post() {
+    const { error } = runAsyncWithUser({
+      userToken: this.urlParams.token,
+      onUser: ({ user, done }) => {
+        done(null, deleteUser(user._id))
+      },
+    })
+
+    if (error) return { error }
+
+    this.response.setHeader('Content-Type', 'application/json')
+
+    return { deleted: true }
   },
 })

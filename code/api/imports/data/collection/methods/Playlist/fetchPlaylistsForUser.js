@@ -1,11 +1,9 @@
 import { playlistCollection } from '../../PlaylistCollection'
 
 export const fetchPlaylistsForUser = currentUserId => userId => {
-  const findPublicSelector = { creatorId: userId }
+  const selector = { creatorId: userId }
 
-  if (userId !== currentUserId) findPublicSelector.isPublic = true
+  if (userId !== currentUserId) selector.isPublic = true
 
-  return playlistCollection
-    .find(findPublicSelector, { sort: { createdAt: -1 } })
-    .fetch()
+  return playlistCollection.find(selector, { sort: { createdAt: -1 } }).fetch()
 }

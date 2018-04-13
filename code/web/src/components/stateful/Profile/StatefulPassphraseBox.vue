@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="tc f3" v-if="!passphrase">Loading...</div>
-    <div class="tc f5 white pa3 bg-light-gray" v-if="passphrase" v-text="passphrase"></div>
+    <div class="tc f2  white pa3 bg-light-gray" v-if="passphrase" v-text="passphrase"></div>
   </div>
 </template>
 <script>

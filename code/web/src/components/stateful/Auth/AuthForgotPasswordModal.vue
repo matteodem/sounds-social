@@ -2,7 +2,7 @@
   <div>
     <pure-modal v-show="modalOpen" @close="closeModal">
       <div class="pa4">
-        <h2 class="tc f2" v-text="`${$t('Forgot your password?')} 💭`"></h2>
+        <modal-title v-text="`${$t('Forgot your password?')} 💭`"></modal-title>
 
         <div class="mt3 mw5 center">
           <pure-input @onEnter="sendMail" @keyup="email = arguments[0]" placeholder="Email"></pure-input>

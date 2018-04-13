@@ -80,7 +80,7 @@
                 <div class="mv2 mw5 center pa3 white bg-blue tc"
                      v-show="succesfullySentForgotPasswordMessage"
                      v-text="$t('The email to reset your password has been sent')"></div>
-                <div class="f7 pointer tc gray" @click="$refs.forgotPasswordModal.openModal()" v-text="$t('Forgot my password')"></div>
+                <div class="f7 pointer tc gray" @click="$refs.forgotPasswordModal.openModal()" v-text="$t('Forgot password')"></div>
               </div>
               </div>
             </div>

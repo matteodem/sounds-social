@@ -39,7 +39,7 @@ export const parseAndUploadFiles = ({
             .store({
               passphrase,
               content: zippedContent,
-              path: `/${username}/${type}/${Random.id()}`,
+              path: `/sounds-social/${username}/${type}/${Random.id()}`,
             })
             .then(files => {
               const lastFile = files[files.length - 1]

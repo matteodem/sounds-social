@@ -70,7 +70,7 @@ export const messages = {
       'Create new playlist': 'Neue Playlist kreieren',
       'Drag and drop to reorder': 'Drag & Drop um zu sortieren',
       'Wrong file format': 'Falsches Datei-Format',
-      'Forgot my password': 'Passwort vergessen',
+      'Forgot password': 'Passwort vergessen',
       'Forgot your password?': 'Passwort vergessen?',
       'New password': 'Neues Passwort',
       'Repeat password': 'Passwort wiederholen',

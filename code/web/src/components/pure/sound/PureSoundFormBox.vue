@@ -16,7 +16,7 @@
                 type="text"
                 :value="name"
                 class="h2 f3 b bn lh-copy black mv2 dim navy"
-                @change="$emit('changeTitle', $event.target.value)"
+                @keyup="$emit('changeTitle', $event.target.value)"
                 :placeholder="$t('Sound name')" />
       </div>
       <div class="description username f5 gray">

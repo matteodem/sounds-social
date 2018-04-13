@@ -18,7 +18,7 @@ type Alias {
 
 input AliasData {
   name: String!
-  type: String!
+  type: String
   description: String
   websiteUrl: String
   avatarFile: FileData

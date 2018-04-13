@@ -37,6 +37,7 @@ import FormError from '../../components/pure/Form/PureFormError.vue'
 import FormField from '../../components/pure/Form/PureFormField.vue'
 import NumberCount from '../../components/pure/User/PureNumberCount.vue'
 import PaginationButtons from '../../components/pure/Pagination/PaginationButtons.vue'
+import PureModalTitle from '../../components/pure/Modal/PureModalTitle.vue'
 
 export const ComponentsList = [
   { id: 'pure-button', component: Button },
@@ -77,5 +78,6 @@ export const ComponentsList = [
   { id: 'member-list', component: MemberList },
   { id: 'alias-list', component: AliasList },
   { id: 'number-count', component: NumberCount },
-  { id: 'pagination-buttons', component: PaginationButtons }
+  { id: 'pagination-buttons', component: PaginationButtons },
+  { id: 'modal-title', component: PureModalTitle }
 ]

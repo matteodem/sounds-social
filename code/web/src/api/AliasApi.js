@@ -44,7 +44,7 @@ export const saveAlias = (
       mutation ${startCase(action)}Alias(
           ${id ? '$id: String!' : ''}
           $name: String! 
-          $type: String! 
+          $type: String
           $websiteUrl: String 
           $avatarFile: FileData 
           $description: String

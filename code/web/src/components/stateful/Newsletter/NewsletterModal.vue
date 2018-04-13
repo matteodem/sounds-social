@@ -2,7 +2,7 @@
   <div>
     <pure-modal v-show="modalOpen" @close="closeModal">
       <div class="pa4">
-        <h2 class="tc f2" v-text="`${$t('Let\'s stay in contact')}! 💬`"></h2>
+        <modal-title v-text="`${$t('Let\'s stay in contact')}! 💬`"></modal-title>
 
         <div class="mt3 mw5 center">
           <pure-input @onEnter="signUpForNewsletter" @keyup="email = arguments[0]" :value="email" placeholder="Email"></pure-input>
