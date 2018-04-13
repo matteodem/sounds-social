@@ -33,7 +33,6 @@
                    v-text="$t('Back to profile settings')"></pure-button>
 
       <!-- TODO: reuse h2 titles: modal-title component -->
-      <!-- TODO: create modal-process component -->
       <pure-modal @close="abortDeleteProcess" v-if="openModalId === 'explain'">
         <div class="pa4">
           <div class="lh-copy">
@@ -89,8 +88,7 @@
           <div class="lh-copy">
             <h2 class="tc f2" v-text="$t('Write down your passphrase')"></h2>
 
-            <!-- TODO: actually display passphrase -->
-            <div class="tc f2 white pa3 bg-light-gray" v-text="'water wow nice okay'"></div>
+            <passphrase-box></passphrase-box>
 
             <div class="tc mt3">
               <span v-text="$t('Your passphrase will not be recoverable after deletion')"></span>!
@@ -133,6 +131,7 @@
 </template>
 <script>
   import HeaderComponent from '../../stateful/StatefulHeader.vue'
+  import PassphraseBox from '../../stateful/Profile/StatefulPassphraseBox.vue'
   import { downloadUserExportData } from '../../../api/UserApi'
 
   const modalIds = ['explain', 'passphraseExplain', 'passphraseDisplay', 'confirm']
@@ -140,6 +139,7 @@
   export default {
     components: {
       HeaderComponent,
+      PassphraseBox,
     },
     metaInfo () {
       return {

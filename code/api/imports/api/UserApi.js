@@ -32,3 +32,21 @@ Api.addRoute('export/:token', {
     this.done()
   },
 })
+
+Api.addRoute('passphrase/:token', {
+  get() {
+    const { result, error } = runAsyncWithUser({
+      userToken: this.urlParams.token,
+      onUser: ({ user, done }) => {
+        done(null, user.passphrase)
+      },
+    })
+
+    if (error) return { error }
+
+    this.response.setHeader('Content-Type', 'application/json')
+    return {
+      passphrase: result,
+    }
+  },
+})
