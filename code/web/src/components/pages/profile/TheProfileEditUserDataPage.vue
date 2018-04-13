@@ -11,7 +11,7 @@
           <h2 v-text="$t('Export data')"></h2>
 
           <p class="lh-copy">
-            <span v-text="$t('This will download a JSON file, which allows you to see all the data Sounds Social has stored about you.')"></span>
+            <span v-text="$t('This will download a JSON file, which allows you to see all the data Sounds Social has stored about you')"></span>.
           </p>
 
           <pure-button @click="downloadExport" :fill="true" v-text="$t('Export')"></pure-button>
@@ -22,7 +22,7 @@
           <p class="lh-copy">
             <span v-text="$t('Want to delete your user on Sounds Social?')"></span>
             <br/>
-            <span v-text="$t('You will be guided through a simple process to do just that.')"></span>
+            <span v-text="$t('You will be guided through a simple process to do just that')"></span>.
           </p>
 
           <pure-button @click="startDeleteProcess" color="red" v-text="$t('Delete')"></pure-button>
@@ -43,7 +43,7 @@
               <li v-text="$t('Your profile data')"></li>
               <li v-text="$t('Your playlists')"></li>
               <li v-text="$t('Your aliases (created by you)')"></li>
-              <li v-text="$t('Metadata of sounds that you uploaded (title, description, etc. including aliases)')"></li>
+              <li v-text="$t('Metadata of sounds that you uploaded')"></li>
             </ul>
           </div>
 
@@ -66,7 +66,7 @@
               <li v-text="$t('Your uploaded covers, profile avatars (image files)')"></li>
             </ul>
 
-            <span v-text="$t('The files will be inaccessible to others after deletion')"></span>.
+            <span v-text="$t('The files will be inaccessible over the URL after deletion')"></span>.
             <br/>
             <span v-text="$t('Your passphrase is the key to')"></span>
             <!-- TODO: link -->

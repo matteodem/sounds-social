@@ -24,20 +24,23 @@ export const messages = {
       Save: 'Speichern',
       Public: 'Öffentlich',
       Private: 'Privat',
-      'Website Url': 'Webseiten Url',
       Publish: 'Publizieren',
       Reset: 'Zurücksetzen',
-      'Profile Language': 'Profil Sprache',
-      'Sound name': 'Sound Name',
       Comments: 'Kommentare',
       Discover: 'Entdecken',
       Feed: 'Feed',
       Type: 'Typ',
       Remove: 'Löschen',
+      Export: 'Exportieren',
+      Communities: 'Communities',
+      Delete: 'Löschen',
+      Continue: 'Weiterfahren',
+      'Website Url': 'Webseiten Url',
+      'Profile Language': 'Profil Sprache',
+      'Sound name': 'Sound Name',
       'Play next': 'Als Nächstes spielen',
       'Play later': 'Später spielen',
       'Send recovery email': 'Wiederherstellungsmail senden',
-      Communities: 'Communities',
       'Upload cover': 'Cover heraufladen',
       'Sound description': 'Sound Beschreibung',
       'Sound uploading': 'Sound wird heraufgeladen',
@@ -87,7 +90,43 @@ export const messages = {
       'Want to stay up to date?': 'Möchtest du auf dem Laufenden bleiben?',
       "You'll be one of the first ones to know about news":
         'Du wirst einer der Ersten sein, die über Neuigkeiten Bescheid weiss',
-      'Sign up for newsletter': 'Für Newsletter anmelden'
+      'Sign up for newsletter': 'Für Newsletter anmelden',
+      'Manage data': 'Daten verwalten',
+      'Manage user data': 'Userdaten verwalten',
+      'Export data': 'Daten exportieren',
+      'Delete user': 'User löschen',
+      'Back to profile settings': 'Zurück zu Profil-Einstellungen',
+      'This will download a JSON file, which allows you to see all the data Sounds Social has stored about you':
+        'Dies wird ein JSON File herunterladen, welches Ihnen alle Daten die wir von Ihnen haben beinhaltet',
+      'Want to delete your user on Sounds Social?':
+        'Möchtest Du deinen User auf Sounds Social löschen?',
+      'You will be guided through a simple process to do just that':
+        'Dieser Prozess ermöglicht es Dir',
+      'What will be permanently deleted?': 'Was wird permanent gelöscht?',
+      'Following data will be deleted forever':
+        'Folgende Daten werden für immer gelöscht',
+      'Your profile data': 'Deine Profildaten',
+      'Your playlists': 'Deine Playlists',
+      'Your aliases (created by you)': 'Deine Aliasse (kreiert von Dir)',
+      'Metadata of sounds that you uploaded':
+        'Metadaten von Sounds die Du heraufgeladen hast',
+      'What will continue being accessible?':
+        'Was wird weiterhin verfügbar sein?',
+      'Following data will still be accessible with your passphrase':
+        'Folgende Daten sind weiterhin mit Deiner Passphrase erreichbar',
+      'The files will be inaccessible over the URL after deletion':
+        'Die Files sind nicht mehr verfügbar über die URL nach dem Löschen',
+      'Your passphrase is the key to': 'Deine Passphrase ist der Weg um',
+      'access the files after deletion':
+        'deine Files nach dem Löschen zu herunterladen',
+      'Write down your passphrase': 'Notiere Deine Passphrase auf',
+      'Your passphrase will not be recoverable after deletion':
+        'Deine Passphrase wird auch gelöscht',
+      'Confirm deletion': 'Löschen bestätigen',
+      'After careful consideration of the previous information':
+        'Nach sorgfältigem Lesen der vorherigen Informationen',
+      'you can now confirm deleting your user':
+        'kannst du das Löschen deines Users bestätigen'
     }
   }
 }
