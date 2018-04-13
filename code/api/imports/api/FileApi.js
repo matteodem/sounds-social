@@ -6,8 +6,8 @@ import { createUserPassphraseIfNeeded } from '../data/collection/methods/User/cr
 import { fetchOneUserById } from '../data/collection/methods/User/fetchOneUserById'
 import { webUrlString } from '../config/AccessData'
 import { resolvePromiseForCallback } from '../lib/resolvePromiseForCallback'
-import { getRequiredUserFromToken } from '../lib/User/getRequiredUserFromToken'
 import { parseAndUploadFiles } from './FileApi/parseAndUploadFiles'
+import { runAsyncWithUser } from './helpers/runAsyncWithUser'
 
 const Api = new Restivus({
   prettyJson: true,
@@ -26,10 +26,9 @@ Api.addRoute(':type', {
   post() {
     const { type } = this.urlParams
 
-    return Async.runSync(done => {
-      getRequiredUserFromToken(this.queryParams.userLoginToken).then(user => {
-        if (!user) return done('No user found')
-
+    return runAsyncWithUser({
+      userToken: this.queryParams.userLoginToken,
+      onUser: ({ user, done }) => {
         const { username } = user
 
         if (hasInvalidArgs({ username, type })) {
@@ -49,7 +48,7 @@ Api.addRoute(':type', {
           done,
           user,
         })
-      })
+      },
     })
   },
 })

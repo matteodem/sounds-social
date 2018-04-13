@@ -1,5 +1,6 @@
-import { checkImageFileType, checkAudioFileType } from '../func/checkFileType'
+import { checkAudioFileType, checkImageFileType } from '../func/checkFileType'
 import { apiEndpointUrl } from '../config/ApiEndpointUrl'
+import { getUserToken } from '../config/getUserToken'
 
 const uploadFile = (file, type) => {
   const data = new FormData()
@@ -7,9 +8,7 @@ const uploadFile = (file, type) => {
 
   // use the file endpoint
   return fetch(
-    `${apiEndpointUrl}/file-api/${type}?userLoginToken=${localStorage.getItem(
-      'Meteor.loginToken'
-    )}`,
+    `${apiEndpointUrl}/file-api/${type}?userLoginToken=${getUserToken()}`,
     {
       method: 'POST',
       body: data

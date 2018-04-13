@@ -1,4 +1,4 @@
-import { apiUrlString } from '../../config/AccessData'
+import { generateFileUrl } from '../../lib/File/generateFileUrl'
 
 const typeDef = `
 input FileData {
@@ -19,8 +19,7 @@ export default {
   typeDefs: [typeDef],
   resolvers: {
     File: {
-      url: ({ userId, hash }) =>
-        `${apiUrlString}/file-api/retrieve/${userId}/${hash}`,
+      url: generateFileUrl,
     },
   },
 }

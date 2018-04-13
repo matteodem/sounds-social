@@ -36,6 +36,7 @@
 </template>
 <script>
   import HeaderComponent from '../../stateful/StatefulHeader.vue'
+  import { downloadUserExportData } from '../../../api/UserApi'
 
   export default {
     components: {
@@ -48,7 +49,7 @@
     },
     methods: {
       downloadExport () {
-
+        downloadUserExportData()
       },
       startDeleteProcess () {
 
