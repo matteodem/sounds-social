@@ -1,12 +1,15 @@
 import router from '../routes'
 
+const openProfilePage = suffix => (id, type) => {
+  return router.push({
+    name: type === 'alias' ? `alias-${suffix}` : `profile-${suffix}`,
+    params: { id }
+  })
+}
+
 const routeNavigator = {
-  openProfile (id, type) {
-    router.push({
-      name: type === 'alias' ? 'alias-detail' : 'profile-detail',
-      params: { id }
-    })
-  }
+  openProfile: openProfilePage('detail'),
+  openProfileEdit: openProfilePage('edit')
 }
 
 export const RouteNavigatorPlugin = {

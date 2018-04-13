@@ -23,7 +23,7 @@
         <stateful-profile-box :user="getUser"></stateful-profile-box>
 
         <div class="mt4 mb3 tc" v-if="isCurrentUser">
-          <pure-button @click="$router.push({ name: 'profile-edit', params: { id: getUser._id } })" v-text="$t('Edit profile')"></pure-button>
+          <pure-button @click="$routeNavigator.openProfileEdit(getUser._id, 'user')" v-text="$t('Edit profile')"></pure-button>
           <div class="dib dn-l">
             <pure-button @click="authLogOut" color="gray" v-text="$t('Logout')"></pure-button>
           </div>

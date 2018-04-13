@@ -10,8 +10,8 @@
 
         <div class="mt4">
           <upload-zone
-                  :label="$t('Update profile avatar')"
-                  @upload="uploadAvatarFileImage(arguments[0])"></upload-zone>
+            :label="$t('Update profile avatar')"
+            @upload="uploadAvatarFileImage(arguments[0])"></upload-zone>
 
           <div v-if="hasUploadedFile" class="mt3 i mid-gray"><span v-text="$t('File uploaded')"></span>!</div>
         </div>
@@ -54,11 +54,15 @@
         </form-field>
 
         <div class="mv4">
-          <pure-button
-            @click="updateProfile"
-            :disabled="$v.$invalid"
-            v-text="$t('Update profile')"
-          ></pure-button>
+          <div class="dib mr2">
+            <pure-button
+              @click="updateProfile"
+              :disabled="$v.$invalid"
+              v-text="$t('Update profile')"
+            ></pure-button>
+          </div>
+
+          <pure-button @click="openUserDataPage" color="orange" v-text="$t('Manage data')"></pure-button>
         </div>
       </div>
     </div>
@@ -177,6 +181,12 @@
           })
           changeLanguage(updateUserProfile.language)
           initI18N()
+        })
+      },
+      openUserDataPage () {
+        this.$router.push({
+          name: 'profile-edit-user-data',
+          params: { id: this.$route.params.id },
         })
       },
     },
