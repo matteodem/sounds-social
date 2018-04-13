@@ -1,6 +1,5 @@
 import moment from 'moment'
 import contentDisposition from 'content-disposition'
-import { Async } from 'meteor/meteorhacks:async'
 import { Restivus } from 'meteor/nimble:restivus'
 import { webUrlString } from '../config/AccessData'
 import { runAsyncWithUser } from './helpers/runAsyncWithUser'
