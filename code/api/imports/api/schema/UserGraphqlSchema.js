@@ -1,7 +1,7 @@
 import { defaultTo, flow, get } from 'lodash/fp'
 import { withCache } from 'graphql-resolver-cache'
-import { check } from 'meteor/check'
 import { resolver, typeDef } from 'meteor/easy:graphqlizer'
+import { checkRequiredString } from '../../lib/check/check'
 import { userCollection } from '../../data/collection/UserCollection'
 import { followUser } from '../../data/collection/methods/User/followUser'
 import { fetchOneUserById } from '../../data/collection/methods/User/fetchOneUserById'
@@ -11,12 +11,13 @@ import { fetchAliasesForUser } from '../../data/collection/methods/Alias/fetchAl
 import { fetchOneProfile } from '../../data/collection/methods/Profile/fetchOneProfile'
 import { fetchUserFollowerCount } from '../../data/collection/methods/User/fetchUserFollowerCount'
 import { fetchCreatorSoundPlayCount } from '../../data/collection/methods/Sound/fetchCreatorSoundPlayCount'
-import { generateCacheKey } from '../helpers/generateCacheKey'
+import { searchUser } from '../../data/collection/methods/User/searchUser'
 import { fetchDisplayName } from '../../data/collection/methods/Profile/fetchDisplayName'
+import { generateCacheKey } from '../helpers/generateCacheKey'
 
 const doUserMethod = userMethod => argIdKey => (root, args, context) => {
   const userId = args[argIdKey]
-  check(userId, String)
+  checkRequiredString(userId)
 
   userMethod(userId)(context.userId)
   return fetchOneUserById(context.userId)
@@ -29,6 +30,11 @@ export default {
       listUser: resolver.list(userCollection),
       currentUser: (root, args, context) =>
         flow(get('userId'), fetchOneUserById)(context),
+      searchUser: (root, { query }, context) => {
+        checkRequiredString(query)
+
+        return searchUser(context.userId)(query)
+      },
     },
     Mutation: {
       followUser: doUserMethod(followUser)('toFollowId'),
@@ -74,6 +80,7 @@ export default {
     
     extend type Query {
       currentUser: User
+      searchUser(query: String!): [User]
     }
     extend type Mutation {
       followUser(toFollowId: String!): User
