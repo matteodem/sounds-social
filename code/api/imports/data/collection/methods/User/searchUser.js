@@ -1,6 +1,6 @@
 import { userSearchIndex } from '../../../search/UserSearchIndex'
 
 export const searchUser = userId => query => {
-  console.log(query, userId)
+  if (!query) return []
   return userSearchIndex.search(query, { userId }).fetch()
 }

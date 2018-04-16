@@ -42,6 +42,13 @@ export const aliasSchema = new SimpleSchema({
   'memberIds.$': {
     type: String,
   },
+  invitedMemberIds: {
+    type: Array,
+    optional: true,
+  },
+  'invitedMemberIds.$': {
+    type: String,
+  },
   followerIds: {
     type: Array,
     optional: true,

@@ -38,6 +38,27 @@
       <div v-if="hasUploadedFile" class="mt3 i mid-gray"><span v-text="$t('File uploaded')"></span>!</div>
     </div>
 
+    <form-field :label="$t('Members')" :error="$v.formData.members">
+      <div class="mt3 lh-copy pa3 b--black-10 ba">
+        <ul class="list pl0 f4 mv0">
+          <li :key="member._id" class="pv2" v-for="member in formData.members">
+            <div @click="$routeNavigator.openProfile(member._id, 'user')"
+                 class="dark-gray link-reset pointer"
+                 v-text="getMemberLabel(member)"></div>
+          </li>
+        </ul>
+
+        <h5 class="mt3 mb2">Add new members</h5>
+        <stateful-user-search-select
+          @addUser="addMember"
+        ></stateful-user-search-select>
+
+        <div v-if="formData.invitedMembers && formData.invitedMembers.length">
+          <!-- TODO -->
+        </div>
+      </div>
+    </form-field>
+
     <div class="mv4">
       <pure-button
         @click="saveAlias"
@@ -60,13 +81,14 @@
 <script>
   import { pick } from 'lodash/fp'
   import { url, required, minLength, maxLength } from 'vuelidate/lib/validators'
-
   import { saveAlias, removeAlias, aliasFormDataQuery } from '../../../api/AliasApi'
   import { addAliasAvatarFile } from '../../../api/StorageApi'
+  import StatefulUserSearchSelect from '../User/StatefulUserSearchSelect.vue'
 
-  const pickFields = pick(['name', 'type', 'description', 'websiteUrl'])
+  const pickFields = pick(['name', 'type', 'description', 'websiteUrl', 'members'])
 
   export default {
+    components: { StatefulUserSearchSelect },
     props: {
       aliasId: {
         type: String,
@@ -81,6 +103,7 @@
           type: '',
           description: '',
           websiteUrl: '',
+          members: [],
         },
       }
     },
@@ -121,6 +144,9 @@
         description: {
           maxLength: maxLength(280),
         },
+        members: {
+          required,
+        },
       },
     },
     methods: {
@@ -153,7 +179,13 @@
             name: 'profile-detail',
             params: { id: 'me' },
           }))
-      }
+      },
+      getMemberLabel ({ displayName, username }) {
+        return `${displayName} (${username})`
+      },
+      addMember (...args) {
+        console.log(...args)
+      },
     },
   }
 </script>

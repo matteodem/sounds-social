@@ -114,6 +114,11 @@ export const aliasFormDataQuery = gql`
       type
       description
       websiteUrl
+      members {
+        _id
+        displayName
+        username
+      }
     }
   }
 `
