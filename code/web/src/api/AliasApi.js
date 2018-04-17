@@ -98,6 +98,19 @@ export const unfollow = id =>
     refetchQueries: ['AliasPage']
   })
 
+export const addAliasMember = data =>
+  apolloClient.mutate({
+    mutation: gql`
+      mutation AddAliasMembersMutation($userId: String!, $aliasId: String!) {
+        addAliasMember(userId: $userId, aliasId: $aliasId) {
+          _id
+        }
+      }
+    `,
+    variables: data,
+    refetchQueries: ['AliasFormData']
+  })
+
 export const aliasPageQuery = gql`
   query AliasPage($id: String!) {
     singleAlias: getAlias(_id: $id) {
@@ -115,6 +128,11 @@ export const aliasFormDataQuery = gql`
       description
       websiteUrl
       members {
+        _id
+        displayName
+        username
+      }
+      invitedMembers {
         _id
         displayName
         username

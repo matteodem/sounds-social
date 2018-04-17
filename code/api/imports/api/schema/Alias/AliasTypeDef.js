@@ -8,6 +8,7 @@ type Alias {
   websiteUrl: String
   avatarFile: File
   members: [User]
+  invitedMembers: [User]
   createdAt: Date
   isFollowedByCurrentUser: Boolean
   canFollow: Boolean
@@ -33,6 +34,7 @@ extend type Mutation {
   createAlias(data: AliasData!): Alias
   updateAlias(_id: String! data: AliasData!): Alias
   removeAlias(_id: String!): Alias
+  addAliasMember(userId: String! aliasId: String!): Alias
   followAlias(toFollowId: String!): Alias
   unfollowAlias(toUnfollowId: String!): Alias
 }

@@ -54,7 +54,15 @@
         ></stateful-user-search-select>
 
         <div v-if="formData.invitedMembers && formData.invitedMembers.length">
-          <!-- TODO -->
+          <h5 class="mt3 mb2">Invited members</h5>
+
+          <ul class="list pl0 f4 mv0">
+            <li :key="member._id" class="pv2" v-for="member in formData.invitedMembers">
+              <div @click="$routeNavigator.openProfile(member._id, 'user')"
+                   class="dark-gray link-reset pointer"
+                   v-text="getMemberLabel(member)"></div>
+            </li>
+          </ul>
         </div>
       </div>
     </form-field>
@@ -81,11 +89,11 @@
 <script>
   import { pick } from 'lodash/fp'
   import { url, required, minLength, maxLength } from 'vuelidate/lib/validators'
-  import { saveAlias, removeAlias, aliasFormDataQuery } from '../../../api/AliasApi'
+  import { saveAlias, removeAlias, aliasFormDataQuery, addAliasMember } from '../../../api/AliasApi'
   import { addAliasAvatarFile } from '../../../api/StorageApi'
   import StatefulUserSearchSelect from '../User/StatefulUserSearchSelect.vue'
 
-  const pickFields = pick(['name', 'type', 'description', 'websiteUrl', 'members'])
+  const pickFields = pick(['name', 'type', 'description', 'websiteUrl', 'members', 'invitedMembers'])
 
   export default {
     components: { StatefulUserSearchSelect },
@@ -183,8 +191,14 @@
       getMemberLabel ({ displayName, username }) {
         return `${displayName} (${username})`
       },
-      addMember (...args) {
-        console.log(...args)
+      addMember ({ value: userId }) {
+        const { aliasId } = this
+
+        addAliasMember({ userId, aliasId })
+          .then(() => {
+            // TODO empty the select
+          })
+          .catch(e => alert(e.message))
       },
     },
   }

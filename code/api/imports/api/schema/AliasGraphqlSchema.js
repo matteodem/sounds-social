@@ -16,6 +16,7 @@ import { generateCacheKey } from '../helpers/generateCacheKey'
 import { fetchCreatorSoundPlayCount } from '../../data/collection/methods/Sound/fetchCreatorSoundPlayCount'
 import { AliasTypeDef } from './Alias/AliasTypeDef'
 import { isCreatorResolver } from './general/isCreatorResolver'
+import { addAliasMember } from '../../data/collection/methods/Alias/addAliasMember'
 
 const doUserAliasMethod = userMethod => argIdKey => (root, args, context) => {
   if (!context.userId) return null
@@ -27,12 +28,15 @@ const doUserAliasMethod = userMethod => argIdKey => (root, args, context) => {
   return fetchOneAliasById(aliasId)
 }
 
+const getMembersResolver = field => flow(get(field), map(fetchOneUserById))
+
 export default {
   typeDefs: [AliasTypeDef],
   resolvers: {
     Alias: {
       avatarFile: flow(get('avatarFileId'), fetchOneFileById),
-      members: flow(get('memberIds'), map(fetchOneUserById)),
+      members: getMembersResolver('memberIds'),
+      invitedMembers: getMembersResolver('invitedMemberIds'),
       canFollow: (root, args, context) =>
         context.userId && !root.memberIds.includes(context.userId),
       isEditable: isCreatorResolver,
@@ -81,6 +85,11 @@ export default {
         deleteAlias(context.userId)(args._id)
 
         return alias
+      },
+      addAliasMember(root, args, context) {
+        const { userId, aliasId } = args
+
+        return addAliasMember(aliasId)(userId)
       },
       followAlias: doUserAliasMethod(followAlias)('toFollowId'),
       unfollowAlias: doUserAliasMethod(unfollowAlias)('toUnfollowId'),
