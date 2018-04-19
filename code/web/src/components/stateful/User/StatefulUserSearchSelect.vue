@@ -1,6 +1,6 @@
 <template>
   <pure-select
-    :placeholder="$t('Search user')"
+    :placeholder="placeholder"
     :options="searchedUserOptions"
     @change="$emit('addUser', arguments[0])"
     @search="searchUsers"
@@ -10,6 +10,11 @@
   import { searchUserSelectOptions } from '../../../api/UserApi'
 
   export default {
+    props: {
+      placeholder: {
+        type: String,
+      },
+    },
     data () {
       return {
         searchValue: '',

@@ -35,9 +35,11 @@ import MemberList from '../../components/pure/Alias/PureMemberList.vue'
 import AliasList from '../../components/pure/Alias/PureAliasList.vue'
 import FormError from '../../components/pure/Form/PureFormError.vue'
 import FormField from '../../components/pure/Form/PureFormField.vue'
+import DraggableList from '../../components/pure/Form/PureDraggableList.vue'
 import NumberCount from '../../components/pure/User/PureNumberCount.vue'
 import PaginationButtons from '../../components/pure/Pagination/PaginationButtons.vue'
 import PureModalTitle from '../../components/pure/Modal/PureModalTitle.vue'
+import AliasMemberList from '../../components/pure/Alias/PureAliasMemberList.vue'
 
 export const ComponentsList = [
   { id: 'pure-button', component: Button },
@@ -79,5 +81,7 @@ export const ComponentsList = [
   { id: 'alias-list', component: AliasList },
   { id: 'number-count', component: NumberCount },
   { id: 'pagination-buttons', component: PaginationButtons },
-  { id: 'modal-title', component: PureModalTitle }
+  { id: 'modal-title', component: PureModalTitle },
+  { id: 'alias-member-list', component: AliasMemberList },
+  { id: 'draggable-list', component: DraggableList }
 ]

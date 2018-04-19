@@ -30,21 +30,14 @@
         </label-input>
 
         <label-input :label="$t('Sounds')">
-          <div class="dark-gray i mv3 f5" v-text="$t('Drag and drop to reorder')"></div>
-
-          <draggable v-model="formData.sounds"
-                     :options="{alias:'sounds'}"
-                     @start="isDragging=true"
-                     @end="isDragging=false">
-            <div v-for="sound in formData.sounds"
-                 :key="sound._id"
-                 class="pointer bg-silver white mb2 pa3">
-              <div class="dib v-mid f4 mr3" @click="removeSound(sound._id)">
-                <pure-icon icon="remove"> </pure-icon>
-              </div>
-              <span class="dib v-mid" v-text="sound.name"></span>
-            </div>
-          </draggable>
+          <draggable-list
+            alias="sounds"
+            :data="formData.sounds"
+            getId="_id"
+            getLabel="name"
+            @change="formData.sounds = arguments[0]"
+            @remove="removeSound(arguments[0]._id)"
+          ></draggable-list>
         </label-input>
 
         <div class="mv4">
@@ -80,7 +73,6 @@
     },
     data () {
       return {
-        isDragging: false,
         formData: {},
       }
     },

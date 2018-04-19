@@ -35,7 +35,9 @@ export const saveAlias = (
   type,
   websiteUrl,
   avatarFile,
-  description = ''
+  description = '',
+  memberIds,
+  invitedMemberIds
 ) => {
   const action = id ? 'update' : 'create'
 
@@ -43,20 +45,25 @@ export const saveAlias = (
     mutation: gql`
       mutation ${startCase(action)}Alias(
           ${id ? '$id: String!' : ''}
-          $name: String! 
-          $type: String
-          $websiteUrl: String 
-          $avatarFile: FileData 
-          $description: String
+          $data: AliasData!
       ) {
-        alias: ${action}Alias(${
-      id ? '_id: $id' : ''
-    } data: { name: $name type: $type websiteUrl: $websiteUrl avatarFile: $avatarFile description: $description }) {
+        alias: ${action}Alias(${id ? '_id: $id' : ''} data: $data) {
           _id
         }
       }
     `,
-    variables: { id, name, type, websiteUrl, avatarFile, description }
+    variables: {
+      id,
+      data: {
+        name,
+        type,
+        websiteUrl,
+        avatarFile,
+        description,
+        memberIds,
+        invitedMemberIds
+      }
+    }
   })
 }
 
@@ -96,19 +103,6 @@ export const unfollow = id =>
     `,
     variables: { id },
     refetchQueries: ['AliasPage']
-  })
-
-export const addAliasMember = data =>
-  apolloClient.mutate({
-    mutation: gql`
-      mutation AddAliasMembersMutation($userId: String!, $aliasId: String!) {
-        addAliasMember(userId: $userId, aliasId: $aliasId) {
-          _id
-        }
-      }
-    `,
-    variables: data,
-    refetchQueries: ['AliasFormData']
   })
 
 export const aliasPageQuery = gql`

@@ -8,12 +8,14 @@ export const updateAlias = userId => _id => ({
   description,
   websiteUrl,
   avatarFile,
+  invitedMemberIds,
 }) => {
   const aliasData = {
     name,
     type,
     description,
     websiteUrl,
+    invitedMemberIds,
   }
 
   if (avatarFile) {

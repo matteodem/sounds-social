@@ -23,6 +23,8 @@ input AliasData {
   description: String
   websiteUrl: String
   avatarFile: FileData
+  memberIds: [String]!
+  invitedMemberIds: [String]
 }
 
 extend type Query {

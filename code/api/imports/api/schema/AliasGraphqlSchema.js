@@ -16,7 +16,6 @@ import { generateCacheKey } from '../helpers/generateCacheKey'
 import { fetchCreatorSoundPlayCount } from '../../data/collection/methods/Sound/fetchCreatorSoundPlayCount'
 import { AliasTypeDef } from './Alias/AliasTypeDef'
 import { isCreatorResolver } from './general/isCreatorResolver'
-import { addAliasMember } from '../../data/collection/methods/Alias/addAliasMember'
 
 const doUserAliasMethod = userMethod => argIdKey => (root, args, context) => {
   if (!context.userId) return null
@@ -85,11 +84,6 @@ export default {
         deleteAlias(context.userId)(args._id)
 
         return alias
-      },
-      addAliasMember(root, args, context) {
-        const { userId, aliasId } = args
-
-        return addAliasMember(aliasId)(userId)
       },
       followAlias: doUserAliasMethod(followAlias)('toFollowId'),
       unfollowAlias: doUserAliasMethod(unfollowAlias)('toUnfollowId'),
