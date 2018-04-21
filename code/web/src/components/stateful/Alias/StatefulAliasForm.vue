@@ -69,7 +69,7 @@
             getId="value"
             getLabel="label"
             @change="newlyInvitedMembers = arguments[0]"
-            @removeMember="removeMember(arguments[0]._id, 'newlyInvitedMembers')"
+            @remove="removeInvitedMember(arguments[0].value)"
           ></draggable-list>
         </div>
 
@@ -107,6 +107,7 @@
   import StatefulUserSearchSelect from '../User/StatefulUserSearchSelect.vue'
 
   const pickFields = pick(['name', 'type', 'description', 'websiteUrl', 'members', 'invitedMembers'])
+  const mapId = map(get('_id'))
 
   export default {
     components: { StatefulUserSearchSelect },
@@ -203,22 +204,30 @@
       },
       getMemberSaveData () {
         return {
-          memberIds: map(get('_id'))(this.formData.members),
+          memberIds: mapId(this.formData.members),
           invitedMemberIds: uniq([
-            ...map(get('_id'))(this.formData.invitedMembers),
+            ...mapId(this.formData.invitedMembers),
             ...map(get('value'))(this.newlyInvitedMembers),
           ]),
         }
       },
       addMember (member) {
-        // TODO: check if already invited or part of alias
-        // TODO: allow to remove members if creator
+        const { members, invitedMembers } = this.formData
+
+        if (mapId([...members, ...invitedMembers]).includes(member.value)) {
+          alert('User already a member or invited!')
+          return null
+        }
+
         this.newlyInvitedMembers.push(member)
       },
       removeMember (_id, memberField = 'members') {
         const filterOnSameId = filter(member => member._id !== _id)
-
         this.formData[memberField] = filterOnSameId(this.formData[memberField])
+      },
+      removeInvitedMember (_id) {
+        const filterOnSameValue = filter(member => member.value !== _id)
+        this.newlyInvitedMembers = filterOnSameValue(this.newlyInvitedMembers)
       },
       isMemberRemovable ({ _id }) {
         return _id !== this.currentUserId

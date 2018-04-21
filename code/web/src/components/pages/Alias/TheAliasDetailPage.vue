@@ -10,7 +10,7 @@
         <div v-if="singleAlias.isInvitedToJoin"
              class="mv3"
         >
-          <div class="dib pa2 f6 bg-blue white" v-text="`${$t('You are invited to join this alias')}!`"></div>
+          <div class="dib pv2 ph3 f6 bg-blue white" v-text="`${$t('You are invited to join this alias')}!`"></div>
           <div class="dib ml2">
             <pure-button @click="acceptInvitation" v-text="$t('Accept')"></pure-button>
           </div>
