@@ -15,6 +15,7 @@ type Alias {
   isEditable: Boolean
   followerCount: Int
   playCount: Int
+  isInvitedToJoin: Boolean
 }
 
 input AliasData {
@@ -38,6 +39,8 @@ extend type Mutation {
   removeAlias(_id: String!): Alias
   addAliasMember(userId: String! aliasId: String!): Alias
   followAlias(toFollowId: String!): Alias
+  acceptInvitation(_id: String!): Alias
+  denyInvitation(_id: String!): Alias
   unfollowAlias(toUnfollowId: String!): Alias
 }
 `

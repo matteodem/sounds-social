@@ -167,9 +167,6 @@
         description: {
           maxLength: maxLength(280),
         },
-        members: {
-          required,
-        },
       },
     },
     methods: {

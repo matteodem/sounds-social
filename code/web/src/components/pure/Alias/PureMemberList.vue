@@ -7,7 +7,7 @@
         <div class="pa2 ba bw1 b--light-gray mb2 pointer" @click="$emit('openMember', member)">
           <div class="dib v-mid cover"
                :style="`width: 50px; height: 50px; background-image: url(${getMemberImage(member)})`"></div>
-          <div class="dib v-mid f5 pl2" style="width: calc(100% - 55px)" v-text="member.username"></div>
+          <div class="dib v-mid f5 pl2" style="width: calc(100% - 55px)" v-text="member.displayName"></div>
         </div>
       </div>
     </div>

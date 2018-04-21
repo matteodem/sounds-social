@@ -23,7 +23,7 @@ export const updateAlias = userId => _id => ({
   }
 
   return aliasCollection.update(
-    { _id, memberIds: userId },
+    { _id, creatorId: userId },
     { $set: omitBy(isNil)(aliasData) }
   )
 }

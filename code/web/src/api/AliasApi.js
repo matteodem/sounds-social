@@ -14,12 +14,14 @@ export const AliasDetailedFieldsFragment = gql`
     websiteUrl
     followerCount
     playCount
+    isInvitedToJoin
     avatarFile {
       url
     }
     members {
       _id
       username
+      displayName
       profile {
         avatarFile {
           url
@@ -102,6 +104,32 @@ export const unfollow = id =>
       }
     `,
     variables: { id },
+    refetchQueries: ['AliasPage']
+  })
+
+export const acceptInvitation = aliasId =>
+  apolloClient.mutate({
+    mutation: gql`
+      mutation AcceptInvitationMutation($aliasId: String!) {
+        acceptInvitation(_id: $aliasId) {
+          _id
+        }
+      }
+    `,
+    variables: { aliasId },
+    refetchQueries: ['AliasPage']
+  })
+
+export const denyInvitation = aliasId =>
+  apolloClient.mutate({
+    mutation: gql`
+      mutation DenyInvitationMutation($aliasId: String!) {
+        denyInvitation(_id: $aliasId) {
+          _id
+        }
+      }
+    `,
+    variables: { aliasId },
     refetchQueries: ['AliasPage']
   })
 

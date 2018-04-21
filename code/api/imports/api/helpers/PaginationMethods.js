@@ -3,8 +3,8 @@ import { check } from 'meteor/check'
 
 export const makePaginatableResolver = ({ resolver, defaultLimit }) => {
   return (root, args, ...restArgs) => {
-    args.limit = getOr(defaultLimit)('pagination.limit')(args)
-    args.skip = getOr(0)('pagination.skip')(args)
+    if (!args.limit) args.limit = getOr(defaultLimit)('pagination.limit')(args)
+    if (!args.skip) args.skip = getOr(0)('pagination.skip')(args)
 
     const resolved = resolver(root, args, ...restArgs)
 

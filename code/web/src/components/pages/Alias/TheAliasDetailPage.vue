@@ -7,6 +7,17 @@
       <div v-if="singleAlias">
         <pure-title v-text="singleAlias.name"></pure-title>
         <h2 class="f3 f2-ns mv3 gray" v-if="singleAlias.type" v-text="singleAlias.type"></h2>
+        <div v-if="singleAlias.isInvitedToJoin"
+             class="mv3"
+        >
+          <div class="dib pa2 f6 bg-blue white" v-text="`${$t('You are invited to join this alias')}!`"></div>
+          <div class="dib ml2">
+            <pure-button @click="acceptInvitation" v-text="$t('Accept')"></pure-button>
+          </div>
+          <div class="dib ml2">
+            <pure-button color="red" @click="denyInvitation" v-text="$t('Deny')"></pure-button>
+          </div>
+        </div>
         <sound-list-component
           :query="aliasSoundsQuery"
           :defineQueryVariables="defineSoundListQueryVariables"></sound-list-component>
@@ -34,7 +45,7 @@
   import HeaderComponent from '../../stateful/StatefulHeader.vue'
   import SoundListComponent from '../../stateful/sound/StatefulSoundList.vue'
   import StatefulProfileBox from '../../stateful/Alias/StatefulAliasProfileBox.vue'
-  import { aliasPageQuery as query } from '../../../api/AliasApi'
+  import { aliasPageQuery as query, acceptInvitation, denyInvitation } from '../../../api/AliasApi'
   import { aliasSoundsQuery } from '../../../api/SoundApi'
 
   export default {
@@ -65,15 +76,26 @@
         loadingKey: 'aliasLoading',
         fetchPolicy: 'network-only',
         variables () {
-          return { id: this.$route.params.id }
+          return { id: this.aliasId }
         },
+      },
+    },
+    computed: {
+      aliasId () {
+        return this.$route.params.id
       },
     },
     methods: {
       defineSoundListQueryVariables () {
         return {
-          aliasId: this.$route.params.id,
+          aliasId: this.aliasId,
         }
+      },
+      acceptInvitation () {
+        acceptInvitation(this.aliasId)
+      },
+      denyInvitation () {
+        denyInvitation(this.aliasId)
       },
     },
   }
