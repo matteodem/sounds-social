@@ -42,7 +42,7 @@
       <div class="mt3 lh-copy pa3 b--black-10 ba">
         <alias-member-list
           alias="members"
-          :isRemovable="false"
+          :isRemovable="isMemberRemovable"
           :members="formData.members"
           @changeMembers="formData.members = arguments[0]"
           @removeMember="removeMember(arguments[0])"
@@ -219,6 +219,9 @@
         const filterOnSameId = filter(member => member._id !== _id)
 
         this.formData[memberField] = filterOnSameId(this.formData[memberField])
+      },
+      isMemberRemovable ({ _id }) {
+        return _id !== this.currentUserId
       },
     },
   }

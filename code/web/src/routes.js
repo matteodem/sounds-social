@@ -4,7 +4,7 @@ import Router from 'vue-router'
 import Meta from 'vue-meta'
 import { constant } from 'lodash'
 
-import { isAuthenticated } from './api/AuthApi'
+import { getUserId, isAuthenticated } from './api/AuthApi'
 import store from './store'
 import { RouteNavigatorPlugin } from './plugins/RouteNavigatorPlugin'
 
@@ -74,6 +74,7 @@ router.beforeEach(async (to, from, next) => {
 
   const authenticated = await isAuthenticated()
   Vue.prototype.userIsAuthenticated = authenticated
+  Vue.prototype.currentUserId = await getUserId()
 
   if (!authenticated && to.meta.needsAuth(to)) {
     router.push({ name: 'home' })

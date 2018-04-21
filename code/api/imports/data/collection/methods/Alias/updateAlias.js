@@ -1,7 +1,8 @@
 import { aliasCollection } from '../../AliasCollection'
 import { fileCollection } from '../../FileCollection'
-import { omitBy, isNil, difference, isEmpty } from 'lodash/fp'
+import { omitBy, isNil } from 'lodash/fp'
 import { fetchOneAliasById } from './fetchOneAliasById'
+import { canChangeMembers } from './updateAlias/canChangeMembers'
 
 export const updateAlias = userId => _id => ({
   name,
@@ -27,9 +28,7 @@ export const updateAlias = userId => _id => ({
   if (memberIds) {
     const alias = fetchOneAliasById(_id)
 
-    if (isEmpty(difference(alias.memberIds)(memberIds))) {
-      aliasData.memberIds = memberIds
-    }
+    if (canChangeMembers(alias)(memberIds)) aliasData.memberIds = memberIds
   }
 
   return aliasCollection.update(

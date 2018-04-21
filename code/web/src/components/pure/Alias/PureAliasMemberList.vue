@@ -5,7 +5,7 @@
       :data="members"
       getId="_id"
       :getLabel="getMemberLabel"
-      :isRemovable="(() => isRemovable)"
+      :isRemovable="isRemovable"
       @change="$emit('changeMembers', arguments[0])"
       @remove="$emit('removeMember', arguments[0]._id)"
     ></draggable-list>
@@ -21,9 +21,8 @@
         type: Array,
       },
       isRemovable: {
-        type: Boolean,
+        type: Function,
         optional: true,
-        default: true,
       },
     },
     methods: {
