@@ -24,7 +24,7 @@ input AliasData {
   description: String
   websiteUrl: String
   avatarFile: FileData
-  memberIds: [String]!
+  memberIds: [String]
   invitedMemberIds: [String]
 }
 
