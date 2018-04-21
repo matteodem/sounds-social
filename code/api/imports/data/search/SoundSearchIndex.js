@@ -24,7 +24,7 @@ export const soundSearchIndex = new Index({
   fields: ['name', 'description'],
   permission: constant(true),
   engine: new MongoDBEngine({
-    selector: function(...args) {
+    selector(...args) {
       const defaultConfig = this.defaultConfiguration()
       const selector = defaultConfig.selector(...args)
 
