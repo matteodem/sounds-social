@@ -37,7 +37,6 @@ extend type Mutation {
   createAlias(data: AliasData!): Alias
   updateAlias(_id: String! data: AliasData!): Alias
   removeAlias(_id: String!): Alias
-  addAliasMember(userId: String! aliasId: String!): Alias
   followAlias(toFollowId: String!): Alias
   acceptInvitation(_id: String!): Alias
   denyInvitation(_id: String!): Alias
