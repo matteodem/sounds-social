@@ -16,7 +16,9 @@
     "cli": "meteor npm run lint && meteor npm run test",
     "lint": "eslint --ignore-pattern '*.test.js' 'server/*.js' 'imports/**/*.js'",
     "format": "prettier-eslint --write 'server/*.js' 'imports/**/*.js'",
-    "precommit": "lint-staged"
+    "precommit": "lint-staged",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "dependencies": {
     "@babel/runtime": "^7.0.0-beta.42",
@@ -48,7 +50,8 @@
     "node-fetch": "^2.1.1",
     "randomatic": ">=3.0.0",
     "request": "^2.87.0",
-    "simpl-schema": "^1.5.0"
+    "simpl-schema": "^1.5.0",
+    "snyk": "^1.123.0"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.2",
@@ -72,5 +75,6 @@
         "git add"
       ]
     }
-  }
+  },
+  "snyk": true
 }
