@@ -30,7 +30,7 @@
     "graphql-tag": "^2.5.0",
     "howler": "^2.0.9",
     "i18next": "^10.0.7",
-    "lodash": "^4.17.4",
+    "lodash": "^4.17.11",
     "meteor-apollo-accounts": "^2.0.3",
     "moment": "^2.21.0",
     "mousetrap": "^1.6.1",
