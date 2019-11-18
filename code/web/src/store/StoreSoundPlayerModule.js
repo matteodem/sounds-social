@@ -89,7 +89,11 @@ export const soundPlayerModule = {
       commit('RESET_SOUND_POSITION', true)
 
       startPlayingSound(sound.id).then(
-        ({ data: { startPlayingSound: { soundPlayingId } } }) => {
+        ({
+          data: {
+            startPlayingSound: { soundPlayingId }
+          }
+        }) => {
           setTimeout(() => {
             if (state.isPlaying) countPlayingSound(sound.id, soundPlayingId)
           }, 1000 * 6)

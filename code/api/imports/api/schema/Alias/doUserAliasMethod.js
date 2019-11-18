@@ -4,7 +4,7 @@ import { fetchOneAliasById } from '../../../data/collection/methods/Alias/fetchO
 export const doUserAliasMethod = userMethod => argIdKey => (
   root,
   args,
-  context
+  context,
 ) => {
   if (!context.userId) return null
 

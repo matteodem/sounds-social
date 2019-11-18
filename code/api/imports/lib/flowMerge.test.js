@@ -10,8 +10,8 @@ describe('flowMerge', function() {
           () => ({ fields: ['name', '_id'] }),
           () => ({}),
           () => ({ duper: 'nice' }),
-          () => ({ duper: 'nice2' })
-        )
+          () => ({ duper: 'nice2' }),
+        ),
       )
       .to.deep.equal({
         sort: 1,

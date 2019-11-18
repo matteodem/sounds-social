@@ -6,6 +6,6 @@ import { sortByNewest } from '../../general/sortByNewest'
 export const findFeedSounds = selector => options => {
   return soundCollection.find(
     selector,
-    flowMerge(sortByNewest, constant(options))
+    flowMerge(sortByNewest, constant(options)),
   )
 }

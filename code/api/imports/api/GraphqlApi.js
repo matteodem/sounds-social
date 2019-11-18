@@ -41,5 +41,5 @@ createApolloServer(
     configServer: graphQLServer => {
       graphQLServer.use(cors())
     },
-  }
+  },
 )

@@ -6,6 +6,6 @@ export const fetchAliasesForUser = userId => fields =>
       {
         memberIds: userId,
       },
-      { fields }
+      { fields },
     )
     .fetch()

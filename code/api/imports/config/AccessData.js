@@ -11,9 +11,7 @@ export const webUrl = isDevelopment
 
 const optionalWebUrlPort = webUrl.port ? `:${webUrl.port}` : ''
 
-export const webUrlString = `${webUrl.protocol}://${
-  webUrl.host
-}${optionalWebUrlPort}`
+export const webUrlString = `${webUrl.protocol}://${webUrl.host}${optionalWebUrlPort}`
 
 export const apiUrlString = isDevelopment
   ? 'http://localhost:3000'

@@ -8,7 +8,7 @@ export const createUserPassphraseIfNeeded = userId => {
   if (!user.passphrase) {
     userCollection.update(
       { _id: userId },
-      { $set: { passphrase: generatePassphrase(16).join(' ') } }
+      { $set: { passphrase: generatePassphrase(16).join(' ') } },
     )
   }
 }

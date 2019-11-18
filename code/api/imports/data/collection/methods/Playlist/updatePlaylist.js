@@ -17,6 +17,6 @@ export const updatePlaylist = ({
 
   playlistCollection.update(
     { _id: playlistId, creatorId: userId },
-    fieldsToUpdate
+    fieldsToUpdate,
   )
 }

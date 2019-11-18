@@ -30,7 +30,7 @@ export const getUsername = async () => {
 
 export const getUserId = () => userId()
 
-export const isAuthenticated = async () => !!await userId()
+export const isAuthenticated = async () => !!(await userId())
 
 export const doLogin = (username, password) =>
   loginWithPassword({ username, password }, apolloClient)

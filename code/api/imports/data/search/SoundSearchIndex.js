@@ -28,7 +28,12 @@ export const soundSearchIndex = new Index({
       const defaultConfig = this.defaultConfiguration()
       const selector = defaultConfig.selector(...args)
 
-      const [queryObject, { search: { userId } }] = args
+      const [
+        queryObject,
+        {
+          search: { userId },
+        },
+      ] = args
 
       return {
         $and: [
@@ -40,10 +45,10 @@ export const soundSearchIndex = new Index({
                 _id: {
                   $in: [
                     ...searchByUsername(defaultConfig, queryObject.name).map(
-                      get('_id')
+                      get('_id'),
                     ),
                     ...searchByAliasName(defaultConfig, queryObject.name).map(
-                      get('_id')
+                      get('_id'),
                     ),
                   ],
                 },

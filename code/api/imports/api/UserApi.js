@@ -26,8 +26,8 @@ Api.addRoute('export/:token', {
     this.response.setHeader(
       'Content-Disposition',
       contentDisposition(
-        `user_export_${moment().format('YYYY_MM_DD_HH_mm_ss')}.json`
-      )
+        `user_export_${moment().format('YYYY_MM_DD_HH_mm_ss')}.json`,
+      ),
     )
     this.response.write(JSON.stringify(result, null, 2))
     this.done()

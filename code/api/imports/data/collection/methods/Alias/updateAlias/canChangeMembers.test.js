@@ -14,19 +14,19 @@ describe('canChangeMembers', function() {
         'memberIdTwo',
         'memberIdThree',
         'memberIdOne',
-      ])
+      ]),
     ).to.equal(true)
   })
 
   it('does not change if creator is not a member anymore', function() {
     expect(
-      canChangeMembers(fakeAlias)(['memberIdTwo', 'memberIdThree'])
+      canChangeMembers(fakeAlias)(['memberIdTwo', 'memberIdThree']),
     ).to.equal(false)
   })
 
   it('changes if members have been removed', function() {
     expect(
-      canChangeMembers(fakeAlias)(['memberIdOne', 'memberIdThree'])
+      canChangeMembers(fakeAlias)(['memberIdOne', 'memberIdThree']),
     ).to.equal(true)
   })
 
@@ -36,7 +36,7 @@ describe('canChangeMembers', function() {
         'memberIdOne',
         'memberIdAdditional',
         'memberIdThree',
-      ])
+      ]),
     ).to.equal(false)
   })
 })

@@ -12,7 +12,7 @@ export const findFollowerIdsForUser = collection => userId => {
       {
         followerIds: userId,
       },
-      { fields: { _id: 1 } }
+      { fields: { _id: 1 } },
     )
     .map(get('_id'))
 }
@@ -29,7 +29,7 @@ export const unfollow = collection => toUnfollowId => followerId => {
   updateFollowerIds(
     collection,
     toUnfollowId,
-    followerIds.filter(id => id !== followerId)
+    followerIds.filter(id => id !== followerId),
   )
 }
 

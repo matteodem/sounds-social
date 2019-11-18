@@ -22,7 +22,7 @@ import { addSoundCoverFileResolver } from './Sound/addSoundCoverFileResolver'
 
 export const SOUND_DEFAULT_LIMIT = 10
 
-let soundsBeingPlayed = []
+const soundsBeingPlayed = []
 
 export default {
   resolvers: {

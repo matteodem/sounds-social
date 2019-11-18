@@ -4,7 +4,7 @@ import { Random } from 'meteor/random'
 export const startPlayingSoundResolver = soundsBeingPlayed => (
   root,
   args,
-  context
+  context,
 ) => {
   const { userId } = context
   const { soundId } = args

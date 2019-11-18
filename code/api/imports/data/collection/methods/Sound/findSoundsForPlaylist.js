@@ -20,7 +20,7 @@ export const findSoundsForPlaylist = userId => playlistId => options => {
 
     return soundCollection.find(
       { $or: mapToSoundIdSelector(userId)(soundIds) },
-      options
+      options,
     )
   }
 }

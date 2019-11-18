@@ -25,7 +25,7 @@ export default {
           if (acc) return acc
 
           return fetchOneSoundCoverFile(soundId)
-        }, null)
+        }, null),
       ),
       creator: root => Meteor.users.findOne({ _id: root.creatorId }),
       sounds: ({ _id }, args, context) =>

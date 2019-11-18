@@ -6,5 +6,5 @@ import { fetchCursor } from '../../../../lib/Cursor/fetchCursor'
 export const fetchSoundsForCreator = flow(
   selectUserIsCreator,
   sel => soundCollection.find(sel),
-  fetchCursor
+  fetchCursor,
 )

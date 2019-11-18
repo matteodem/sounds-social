@@ -33,6 +33,6 @@ export const updateAlias = userId => _id => ({
 
   return aliasCollection.update(
     { _id, creatorId: userId },
-    { $set: omitBy(isNil)(aliasData) }
+    { $set: omitBy(isNil)(aliasData) },
   )
 }

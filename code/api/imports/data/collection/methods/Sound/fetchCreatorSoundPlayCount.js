@@ -7,7 +7,7 @@ export const fetchCreatorSoundPlayCount = creatorId => {
       {
         creatorId,
       },
-      { fields: { playsCount: 1 } }
+      { fields: { playsCount: 1 } },
     )
     .map(get('playsCount'))
     .reduce((a, b) => a + b, 0)

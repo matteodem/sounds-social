@@ -15,8 +15,8 @@ export const acceptInvitation = aliasId => invitedMemberId => accept => {
       { _id: aliasId },
       flowMerge(
         constant({ $pull: { invitedMemberIds: invitedMemberId } }),
-        constant(updateMethod)
-      )
+        constant(updateMethod),
+      ),
     )
   }
 }

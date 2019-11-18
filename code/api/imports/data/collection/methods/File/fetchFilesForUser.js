@@ -5,5 +5,5 @@ import { fetchCursor } from '../../../../lib/Cursor/fetchCursor'
 export const fetchFilesForUser = flow(
   userId => ({ userId }),
   sel => fileCollection.find(sel),
-  fetchCursor
+  fetchCursor,
 )

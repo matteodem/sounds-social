@@ -5,7 +5,7 @@ import { countSoundPlay } from '../../../data/collection/methods/Sound/countSoun
 export const countPlayingSoundResolver = soundsBeingPlayed => (
   root,
   args,
-  context
+  context,
 ) => {
   const { userId } = context
 

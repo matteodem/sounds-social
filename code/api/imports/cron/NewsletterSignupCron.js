@@ -14,7 +14,7 @@ const notifySignUps = () => {
     .count()
 
   console.log(
-    `Newsletter SignUps: ${lastDaySignUpCount} since 24 hours (${allSignUpCount} in total)`
+    `Newsletter SignUps: ${lastDaySignUpCount} since 24 hours (${allSignUpCount} in total)`,
   )
 
   setTimeout(notifySignUps, 1000 * 60 * 60 * 24)

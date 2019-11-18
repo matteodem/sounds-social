@@ -3,5 +3,5 @@ import { selectUserIsCreator } from './selectUserIsCreator'
 import { soundCollection } from '../../SoundCollection'
 
 export const deleteSoundsForUser = flow(selectUserIsCreator, sel =>
-  soundCollection.remove(sel)
+  soundCollection.remove(sel),
 )

@@ -34,7 +34,7 @@ export const ipfsFileStorage = {
     return new Promise(resolve =>
       node.files.add({ content: buffer, path }, (err, data) => {
         if (!err) resolve(data)
-      })
+      }),
     )
   },
   find: async (hash, passphrase) => {
