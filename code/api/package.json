@@ -38,7 +38,7 @@
     "graphql-server-express": "^1.4.1",
     "graphql-tag": "^2.10.1",
     "graphql-tools": "^4.0.6",
-    "ipfs": "^0.39.0",
+    "ipfs": "^0.41.0",
     "join-mongo": "0.0.1",
     "jquery": "^3.4.1",
     "lodash": "^4.17.15",
