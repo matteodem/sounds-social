@@ -24,7 +24,7 @@
     "apollo-server-express": "^2.9.9",
     "atob": ">=2.1.2",
     "babel-runtime": "^6.26.0",
-    "bcrypt": "^3.0.7",
+    "bcrypt": "^5.0.0",
     "body-parser": "^1.19.0",
     "content-disposition": "^0.5.3",
     "cors": "^2.8.5",
