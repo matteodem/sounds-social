@@ -41,7 +41,7 @@
     "ipfs": "^0.39.0",
     "join-mongo": "0.0.1",
     "jquery": "^3.4.1",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.17",
     "meteor-node-stubs": "^0.4.1",
     "moment": "^2.24.0",
     "niceware": "^1.0.7",
